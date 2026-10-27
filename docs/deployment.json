@@ -1,12 +1,12 @@
 {
-  "timestampUTC": "2026-10-27T02:54:12Z",
-  "commit": "68837410fe967412d55f3bd25e182bd4fd03c29c",
+  "timestampUTC": "2026-10-27T03:04:07Z",
+  "commit": "f2a6453417f8f7672acd97319a6fd140c95d2bb7",
   "url": "https://favio-b.github.io/ACTIVIDAD9-ING-APLICADA/",
   "files": [
     {
       "file": "index.html",
       "http": 200,
-      "sha256_normalized": "44b83f5a18db75cc2632f87657226d22dd62842f89057a1910a183d0c2689271",
+      "sha256_normalized": "adbc699ebc8fb0affb96391f409d2c8c8e76926f9497d52a370e2544d9b72977",
       "matchesLocal": true
     },
     {
@@ -16,21 +16,27 @@
       "matchesLocal": true
     },
     {
+      "file": "navigation.js",
+      "http": 200,
+      "sha256_normalized": "84d8224556c50ced9fb07d3efa02d7b7129e4ea37733ab097febe3de573f113b",
+      "matchesLocal": true
+    },
+    {
       "file": "app.js",
       "http": 200,
-      "sha256_normalized": "9c5f7c6e6b8b14e73b89815cb175186d9787baa6c2e2801b6716b003bc8ee925",
+      "sha256_normalized": "56df8bd8705bc25fa84b35ad0f39f739d3ef136750a4c60c52e5b6d22d8a5de6",
       "matchesLocal": true
     },
     {
       "file": "simulation.js",
       "http": 200,
-      "sha256_normalized": "b0baaf6ec99bca2b98a8438373b6da4732e4fd80f3aaf4a265b1b35f5986b63c",
+      "sha256_normalized": "e700341611375389c57c81d74cb29c246453ce508b433ca6482265e924ec44c2",
       "matchesLocal": true
     },
     {
       "file": "theme.css",
       "http": 200,
-      "sha256_normalized": "1c09c5cd0993d4a06b6eeec06ab9e3f70f779afdd7e3c2c9aa1a0b3c973c904f",
+      "sha256_normalized": "44e9a48ff63d4562c71b09839083cd0c4cdf6b35dfd195267ab6f1a24090ade0",
       "matchesLocal": true
     },
     {
@@ -42,7 +48,7 @@
     {
       "file": "assets/tailwind.css",
       "http": 200,
-      "sha256_normalized": "237aa28e8137f974666ebd7539564b6ddefe413f510a60f919bbf7b4644a9e45",
+      "sha256_normalized": "896ed29cb8d2ddcc3b913494e16683bec08943acebd230081c18660818d30b11",
       "matchesLocal": true
     },
     {

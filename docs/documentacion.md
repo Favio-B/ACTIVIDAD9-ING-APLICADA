@@ -173,7 +173,7 @@ npm run test:browser
 | 8 | Recomendación verificable | Cumplido | Cuatro filtros obligatorios, después puntaje; motivos cuantificados de descarte y declaración explícita si no hay viable. |
 | 9 | Interfaz accesible y adaptable | Cumplido con alcance declarado | Playwright: 360, 390, 768, 1280 px; teclado, etiquetas, estados, movimiento reducido; inspección visual de capturas. No se certifica auditoría WCAG ni lector de pantalla real. |
 | 10 | Validación y pruebas | Cumplido | 24 pruebas de modelo (incluyen las 8 originales), 23 de navegador; regresión contra 300 estimaciones y 400 decisiones del commit anterior. `docs/pruebas.md`. |
-| 11 | Documentación y sitio | Cumplido | README, modelo, matriz, pruebas locales y públicas. Sitio con HTTP 200, nueve archivos coincidentes y 21/21 pruebas públicas en `docs/publicacion.md`. |
+| 11 | Documentación y sitio | Cumplido | README, modelo, matriz, pruebas locales y públicas. Sitio con HTTP 200, diez archivos coincidentes y 23/23 pruebas públicas en `docs/publicacion.md`. |
 | 12 | Sustentación | Cumplido | Guion para modificar una variable, historial de cinco ejecuciones, datos sustituidos, CSV y resultados visibles antes del 3D. |
 
 ## Sustentación reproducible

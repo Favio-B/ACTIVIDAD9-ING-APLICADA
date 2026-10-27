@@ -79,4 +79,4 @@ Las pruebas no son benchmarks del sistema real. No se midieron latencias de What
 
 ## Verificación final del sitio público
 
-La misma suite pasó **21/21** contra GitHub Pages; cero errores de consola, ejecución y recursos. Se verificaron por hash los nueve archivos de la versión funcional. Ver [publicación](publicacion.md), [reporte público completo](published-tests.json) y [hashes de despliegue](deployment.json). Los 12 requisitos funcionales quedan cubiertos con los límites de alcance declarados.
+La misma suite pasó **23/23** contra GitHub Pages; cero errores de consola, ejecución y recursos. Se verificaron por hash los diez archivos de la versión funcional. Ver [publicación](publicacion.md), [reporte público completo](published-tests.json) y [hashes de despliegue](deployment.json). Los 12 requisitos funcionales quedan cubiertos con los límites de alcance declarados.
