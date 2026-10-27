@@ -2,6 +2,7 @@
   "devDependencies": {
     "@tailwindcss/cli": "4.3.3",
     "bootstrap": "5.3.8",
+    "marked": "18.1.2",
     "playwright": "1.64.1",
     "tailwindcss": "4.3.3"
   },
@@ -11,6 +12,8 @@
   "scripts": {
     "build:css": "node scripts/build-css.mjs",
     "test": "node scripts/test-model.cjs",
-    "test:browser": "node scripts/test-browser.cjs"
+    "test:browser": "node scripts/test-browser.cjs",
+    "build:docs": "node scripts/build-documentation.mjs",
+    "build": "npm run build:css && npm run build:docs"
   }
 }

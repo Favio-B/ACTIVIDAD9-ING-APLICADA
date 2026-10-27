@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-27T03:02:51.319Z",
+  "timestamp": "2026-10-27T03:16:31.436Z",
   "url": "file:///C:/Users/febm6/OneDrive/Escritorio/ACTIVIDAD9-ING-APLICADA/index.html",
   "tests": [
     {
@@ -304,7 +304,7 @@
     {
       "name": "Menú muestra una sola sección y conserva datos",
       "input": {},
-      "expected": "Ocho vistas, misma ejecución y controles",
+      "expected": "Diez vistas, misma ejecución y controles",
       "actual": {
         "views": [
           "configuration",
@@ -314,7 +314,9 @@
           "visual",
           "model",
           "tests",
-          "presentation"
+          "conclusions",
+          "documentation",
+          "evidence"
         ],
         "sameExecution": true
       },
@@ -329,6 +331,27 @@
       "actual": {
         "visibleSections": 1,
         "resultHeight": 1690
+      },
+      "pass": true
+    },
+    {
+      "name": "Conclusiones calculadas del escenario",
+      "input": {},
+      "expected": "Conclusiones reales; sin menú Sustentación",
+      "actual": {
+        "dynamic": true,
+        "renamed": true
+      },
+      "pass": true
+    },
+    {
+      "name": "Documentación y evidencias en vistas legibles",
+      "input": {},
+      "expected": "HTML, matriz y tres reportes sin enlaces MD",
+      "actual": {
+        "topics": 14,
+        "reports": 3,
+        "rawMarkdownLinks": 0
       },
       "pass": true
     },

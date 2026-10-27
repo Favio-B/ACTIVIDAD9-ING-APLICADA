@@ -21,7 +21,7 @@ Repositorio: https://github.com/Favio-B/ACTIVIDAD9-ING-APLICADA
 8. **Exportar CSV** valida y recalcula primero. Nunca combina métricas anteriores con límites nuevos. Si una entrada es inválida, explica el error y no descarga archivo.
 9. Ejecuta pruebas desde la página o los comandos descritos abajo. Restablecer recupera nombre, roles, escenario, límites, prioridad y resultados originales.
 
-En escritorio hay un menú a la izquierda y una única sección visible a la derecha. En móvil hay un selector de sección que permanece visible al desplazar. Configuración, Recomendación, Comparación, Cálculo, 3D, Modelo, Pruebas y Sustentación se abren por separado, sin perder controles ni resultados. Simular abre Recomendación y el 3D queda como vista secundaria. Los detalles de cumplimiento y descarte son desplegables; si no hay alternativa viable, los descartes se abren automáticamente. El cálculo y la exportación siguen funcionando si el archivo 3D no carga o el canvas no está disponible.
+En escritorio hay un menú a la izquierda y una única sección visible a la derecha. En móvil hay un selector de sección que permanece visible al desplazar. Configuración, Recomendación, Comparación, Cálculo, 3D, Modelo, Pruebas, Conclusiones, Documentación y Evidencias se abren por separado, sin perder controles ni resultados. Simular abre Recomendación y el 3D queda como vista secundaria. Los detalles de cumplimiento y descarte son desplegables; si no hay alternativa viable, los descartes se abren automáticamente. El cálculo y la exportación siguen funcionando si el archivo 3D no carga o el canvas no está disponible.
 
 ## Variables, límites y unidades
 
@@ -172,7 +172,7 @@ npm run test:browser
 | 7 | Comparación equivalente | Cumplido | Misma entrada en cada ejecución; gráfico seleccionable de cinco indicadores; advertencia de cambios múltiples entre escenarios. |
 | 8 | Recomendación verificable | Cumplido | Cuatro filtros obligatorios, después puntaje; motivos cuantificados de descarte y declaración explícita si no hay viable. |
 | 9 | Interfaz accesible y adaptable | Cumplido con alcance declarado | Playwright: 360, 390, 768, 1280 px; teclado, etiquetas, estados, movimiento reducido; inspección visual de capturas. No se certifica auditoría WCAG ni lector de pantalla real. |
-| 10 | Validación y pruebas | Cumplido | 24 pruebas de modelo (incluyen las 8 originales), 23 de navegador; regresión contra 300 estimaciones y 400 decisiones del commit anterior. `docs/pruebas.md`. |
+| 10 | Validación y pruebas | Cumplido | 24 pruebas de modelo (incluyen las 8 originales), 25 de navegador; regresión contra 300 estimaciones y 400 decisiones del commit anterior. `docs/pruebas.md`. |
 | 11 | Documentación y sitio | Cumplido | README, modelo, matriz, pruebas locales y públicas. Sitio con HTTP 200, diez archivos coincidentes y 23/23 pruebas públicas en `docs/publicacion.md`. |
 | 12 | Sustentación | Cumplido | Guion para modificar una variable, historial de cinco ejecuciones, datos sustituidos, CSV y resultados visibles antes del 3D. |
 
@@ -201,3 +201,9 @@ Para validar conclusiones: implementar prototipos equivalentes, mantener infraes
 - Sunardi, A., & Suharjito (2019). *MVC Architecture: A Comparative Study Between Laravel Framework and Slim Framework in Freelancer Project Monitoring System Web Based*. Procedia Computer Science 157, 134-141. DOI: 10.1016/j.procs.2019.08.150.
 
 Las referencias se conservan como bibliografía conceptual suministrada; esta revisión no atribuye ni valida coeficientes numéricos a partir de ellas.
+
+## Conclusiones, documentación y evidencias en pantalla
+
+La sección Conclusiones reemplaza la antigua sección de Sustentación: muestra interpretación de la decisión real, condiciones, evidencia calculada, dependencia del escenario y limitaciones. Conserva un historial desplegable. Si no hay alternativa viable, las conclusiones lo declaran y explican los incumplimientos.
+
+Documentación contiene esta guía en HTML, dividida por temas con tablas adaptables. Evidencias muestra tres reportes registrados (modelo, navegador local y sitio público), con sus fechas, entradas, esperado y obtenido. Son instantáneas verificadas, no mediciones nuevas al abrir el lector. El generador `scripts/build-documentation.mjs` convierte fuentes y reportes locales en `assets/documentation-data.js`. `reader.js` los presenta sin solicitudes de red ni archivos Markdown abiertos por el usuario.

@@ -14,7 +14,7 @@ Compara Monolítica, Monolito modular y Microservicios con las mismas entradas. 
 4. Modificar controles muestra **Cambios pendientes de simular**. Exportar valida y recalcula primero para mantener todo el CSV coherente.
 5. Explora el 3D sin alterar la decisión calculada. Tiene pausa, pasos, velocidad, rotación, zoom y control por teclado; es opcional para el cálculo.
 
-No necesitas servidor ni internet: abre `index.html` conservando `model.js`, `navigation.js`, `app.js`, `simulation.js`, `theme.css`, `simulation.css` y `assets/` en sus ubicaciones.
+No necesitas servidor ni internet: abre `index.html` conservando `model.js`, `navigation.js`, `app.js`, `simulation.js`, `reader.js`, `theme.css`, `simulation.css` y `assets/` en sus ubicaciones.
 
 ## Estilos
 
@@ -31,7 +31,7 @@ npm run test:browser
 
 - 24 pruebas del modelo, incluidas las ocho originales.
 - Regresión contra el commit `6e1c268`: 300 estimaciones y 400 decisiones idénticas.
-- 23 comprobaciones de navegador: CSV, invalidación, escenarios, prioridades, 3D independiente, teclado, movimiento reducido, fallback y anchos 360/390/768/1280.
+- 25 comprobaciones de navegador: CSV, invalidación, escenarios, prioridades, 3D independiente, teclado, movimiento reducido, fallback y anchos 360/390/768/1280.
 - Windows usa Edge instalado; otros sistemas necesitan `npx playwright install chromium`.
 - `npm test` necesita Git y el commit de referencia. Las capturas se guardan en `artifacts/` (no versionado).
 
@@ -39,8 +39,8 @@ Para probar la versión publicada, define `MENUSHIELD_URL` con la URL del sitio 
 
 ## Documentación y evidencia
 
-- [Modelo completo, coeficientes, reglas y matriz de los 12 requisitos](docs/documentacion.md).
-- [Pruebas ejecutadas: entradas, esperado y obtenido](docs/pruebas.md).
+- [Modelo completo, coeficientes, reglas y matriz de los 12 requisitos](https://favio-b.github.io/ACTIVIDAD9-ING-APLICADA/#documentation).
+- [Pruebas ejecutadas: entradas, esperado y obtenido](https://favio-b.github.io/ACTIVIDAD9-ING-APLICADA/#evidence).
 - [Reporte del modelo](docs/model-tests.json) y [reporte de navegador local](docs/browser-tests.json).
 - [Verificación de publicación](docs/publicacion.md).
 
@@ -48,4 +48,8 @@ El código conserva los coeficientes del motor anterior; la interfaz no contiene
 
 ## Navegación por secciones
 
-El menú izquierdo abre una sola sección: Configuración, Recomendación, Comparación, Cálculo explicado, Exploración 3D, Modelo, Pruebas o Sustentación. En móvil hay un selector fijo al desplazar. Los controles y la ejecución se conservan al cambiar de vista; el botón global Simular calcula y abre Recomendación. Los enlaces directos, el historial del navegador y el teclado también funcionan. Los detalles de cumplimiento y descarte se despliegan a petición; si no hay viable, los descartes se abren automáticamente.
+El menú izquierdo abre una sola sección: Configuración, Recomendación, Comparación, Cálculo explicado, Exploración 3D, Modelo, Pruebas, Conclusiones, Documentación o Evidencias. En móvil hay un selector fijo al desplazar. Los controles y la ejecución se conservan al cambiar de vista; el botón global Simular calcula y abre Recomendación. Los enlaces directos, el historial del navegador y el teclado también funcionan. Los detalles de cumplimiento y descarte se despliegan a petición; si no hay viable, los descartes se abren automáticamente.
+
+## Conclusiones y lector integrado
+
+Conclusiones interpreta la ejecución actual sin alterar el motor. Documentación se presenta como HTML con temas desplegables y tablas. Evidencias muestra reportes registrados del modelo, navegador local y sitio público, con fecha, versión y detalle esperado/obtenido. Se generan con `npm run build:docs` a partir de fuentes versionadas; el usuario no necesita abrir Markdown ni JSON. `npm run build` reconstruye estilos y contenido de lectura. Las lecturas funcionan sin servidor ni internet.

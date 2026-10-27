@@ -35,11 +35,11 @@ Comando: `npm test`. Motor histórico: commit `6e1c268`; 100 vectores determinis
 
 Tolerancia de las referencias numéricas: 0,02. Las comparaciones contra el motor anterior usan igualdad exacta. [JSON completo](model-tests.json).
 
-## Navegador: 23/23 comprobaciones aprobadas
+## Navegador: 25/25 comprobaciones aprobadas
 
-Comando: `npm run test:browser`. Reporte local completo en [browser-tests.json](browser-tests.json). Se verifican ocho secciones independientes, conservación de estado, selector móvil, controles numéricos y ausencia de errores. Capturas en `artifacts/`.
+Reporte completo en [browser-tests.json](browser-tests.json). Las evidencias se muestran en la sección Evidencias del aplicativo.
 
-| Comprobación | Entrada o acción | Esperado | Obtenido | Estado |
+| Comprobación | Acción | Esperado | Obtenido | Estado |
 |---|---|---|---|---|
 | Referencia y jerarquía | `{}` | Monolítica; recomendación antes de 3D | `{"winner": "Monolítica", "latency": 484.06683049501834}` | APROBADA |
 | Cambios pendientes y resize coherente | `{"budget": 1}` | Aviso; ejecución anterior intacta | `{"pending": true, "budgetOfDisplayedExecution": 200}` | APROBADA |
@@ -61,8 +61,10 @@ Comando: `npm run test:browser`. Reporte local completo en [browser-tests.json](
 | Gráficos usan el último resultado | `{}` | Cinco indicadores; sin recalcular decisión | `{"indicators": 5, "sameExecution": true}` | APROBADA |
 | Motor funciona sin archivo 3D | `{}` | Recomendación y CSV sin animación | `{"recommendation": true, "csv": true}` | APROBADA |
 | Canvas 3D no disponible | `{}` | Mensaje alternativo y cálculo válido | `{"fallback": true, "winner": "mono"}` | APROBADA |
-| Menú muestra una sola sección y conserva datos | `{}` | Ocho vistas, misma ejecución y controles | `{"views": ["configuration", "results", "comparison", "calculation", "visual", "model", "tests", "presentation"], "sameExecution": true}` | APROBADA |
+| Menú muestra una sola sección y conserva datos | `{}` | Diez vistas, misma ejecución y controles | `{"views": ["configuration", "results", "comparison", "calculation", "visual", "model", "tests", "conclusions", "documentation", "evidence"], "sameExecution": true}` | APROBADA |
 | Selector móvil y botón global | `{"width": 360}` | Cambios de sección sin desplazamiento largo | `{"visibleSections": 1, "resultHeight": 1690}` | APROBADA |
+| Conclusiones calculadas del escenario | `{}` | Conclusiones reales; sin menú Sustentación | `{"dynamic": true, "renamed": true}` | APROBADA |
+| Documentación y evidencias en vistas legibles | `{}` | HTML, matriz y tres reportes sin enlaces MD | `{"topics": 14, "reports": 3, "rawMarkdownLinks": 0}` | APROBADA |
 | Consola y recursos normales | `{}` | Cero errores | `{"runtime": 0, "console": 0, "resources": 0}` | APROBADA |
 
 ## Fallos reproducidos antes de corregir
@@ -79,4 +81,8 @@ Las pruebas no son benchmarks del sistema real. No se midieron latencias de What
 
 ## Verificación final del sitio público
 
-La misma suite pasó **23/23** contra GitHub Pages; cero errores de consola, ejecución y recursos. Se verificaron por hash los diez archivos de la versión funcional. Ver [publicación](publicacion.md), [reporte público completo](published-tests.json) y [hashes de despliegue](deployment.json). Los 12 requisitos funcionales quedan cubiertos con los límites de alcance declarados.
+La misma suite pasó **25/25** contra GitHub Pages; cero errores de consola, ejecución y recursos. Se verificaron por hash los diez archivos de la versión funcional. Ver [publicación](publicacion.md), [reporte público completo](published-tests.json) y [hashes de despliegue](deployment.json). Los 12 requisitos funcionales quedan cubiertos con los límites de alcance declarados.
+
+## Lector integrado y conclusiones
+
+La suite comprueba diez secciones, conclusiones calculadas para escenarios viables e inviables, documentación HTML con más de diez temas y tres reportes legibles, sin enlaces a archivos Markdown en la vista. Las nuevas evidencias se consultan en el aplicativo mediante «Documentación» y «Evidencias».

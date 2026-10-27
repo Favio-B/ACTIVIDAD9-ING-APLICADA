@@ -67,7 +67,7 @@ function draw(run){
  run.results.forEach((r,i)=>{const y=35+i*80,barWidth=width-100;ctx.fillStyle='#374151';ctx.fillText(`${r.name}${run.winner?.id===r.id?' ✓':''}`,8,y);ctx.fillStyle='#F3F4F6';ctx.fillRect(8,y+8,barWidth,25);ctx.fillStyle=run.winner?.id===r.id?'#22C55E':'#1E3A5F';ctx.fillRect(8,y+8,Math.max(1,barWidth*values[i]/max),25);ctx.fillStyle='#1E3A5F';ctx.fillText(fmt(values[i])+' '+unit,Math.min(width-90,14+barWidth*values[i]/max),y+26);});
 }
 function renderHistory(){
- $('runHistory').innerHTML='<h3>Últimas ejecuciones · evidencia para sustentación</h3>'+history.map(run=>`<p class="history-item"><strong>${esc(run.metadata.id)}: ${run.winner?.name||'Ninguna viable'}</strong><br>${Object.entries(run.inputs).map(([k,v])=>`${fieldNames[k]} ${v}`).join(' · ')}<br>Presupuesto ${run.limits.budget}; p95 máx. ${run.limits.maxLatency}; disponibilidad mín. ${run.limits.minAvailability}; ${priorities[run.priority].label}.<br>Monolítica: ${fmt(run.results[0].latency)} ms; ${fmt(run.results[0].cap)} ped/min.</p>`).join('');
+ $('runHistory').innerHTML='<h3>Últimas ejecuciones · comparación de resultados</h3>'+history.map(run=>`<p class="history-item"><strong>${esc(run.metadata.id)}: ${run.winner?.name||'Ninguna viable'}</strong><br>${Object.entries(run.inputs).map(([k,v])=>`${fieldNames[k]} ${v}`).join(' · ')}<br>Presupuesto ${run.limits.budget}; p95 máx. ${run.limits.maxLatency}; disponibilidad mín. ${run.limits.minAvailability}; ${priorities[run.priority].label}.<br>Monolítica: ${fmt(run.results[0].latency)} ms; ${fmt(run.results[0].cap)} ped/min.</p>`).join('');
 }
 function simulate(options={}){
  const x=input(),l=limits();if(!validateControls(x,l)){if(options.focus)focusDecision();return null;}
