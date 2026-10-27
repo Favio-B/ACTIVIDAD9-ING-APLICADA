@@ -64,7 +64,7 @@ Reporte completo en [browser-tests.json](browser-tests.json). Las evidencias se 
 | Menú muestra una sola sección y conserva datos | `{}` | Diez vistas, misma ejecución y controles | `{"views": ["configuration", "results", "comparison", "calculation", "visual", "model", "tests", "conclusions", "documentation", "evidence"], "sameExecution": true}` | APROBADA |
 | Selector móvil y botón global | `{"width": 360}` | Cambios de sección sin desplazamiento largo | `{"visibleSections": 1, "resultHeight": 1690}` | APROBADA |
 | Conclusiones calculadas del escenario | `{}` | Conclusiones reales; sin menú Sustentación | `{"dynamic": true, "renamed": true}` | APROBADA |
-| Documentación y evidencias en vistas legibles | `{}` | HTML, matriz y tres reportes sin enlaces MD | `{"topics": 14, "reports": 3, "rawMarkdownLinks": 0}` | APROBADA |
+| Documentación independiente y evidencias conservadas | `{}` | HTML, matriz y tres reportes sin enlaces MD | `{"topics": 14, "reports": 3, "rawMarkdownLinks": 0}` | APROBADA |
 | Consola y recursos normales | `{}` | Cero errores | `{"runtime": 0, "console": 0, "resources": 0}` | APROBADA |
 
 ## Fallos reproducidos antes de corregir
@@ -86,3 +86,5 @@ La misma suite pasó **25/25** contra GitHub Pages; cero errores de consola, eje
 ## Lector integrado y conclusiones
 
 La suite comprueba diez secciones, conclusiones calculadas para escenarios viables e inviables, documentación HTML con más de diez temas y tres reportes legibles, sin enlaces a archivos Markdown en la vista. Las nuevas evidencias se consultan en el aplicativo mediante «Documentación» y «Evidencias».
+
+La documentación técnica también se verifica como página HTML independiente: enlace en otra pestaña, índice de 14 temas, ausencia de enlaces Markdown, adaptación móvil y estilo de impresión. Evidencias conserva sus tres reportes y su presentación.

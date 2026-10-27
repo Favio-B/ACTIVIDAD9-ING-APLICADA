@@ -18,8 +18,8 @@
   if(options.focus){document.getElementById('viewTitle').focus({preventScroll:true});document.querySelector('.workspace-content').scrollIntoView({block:'start',behavior:'instant'});}
  }
  function fromHash(){const id=location.hash.slice(1)==='presentation'?'conclusions':location.hash.slice(1),view=Object.keys(views).find(v=>views[v][1]===id);show(view||'results',{history:false});}
- document.querySelectorAll('.workspace-nav a').forEach(link=>link.addEventListener('click',e=>{e.preventDefault();show(link.dataset.target,{focus:true});}));
- document.getElementById('viewSelect').addEventListener('change',e=>show(e.target.value,{focus:true}));
+ document.querySelectorAll('.workspace-nav a').forEach(link=>link.addEventListener('click',e=>{if(link.hasAttribute('data-external-document'))return;e.preventDefault();show(link.dataset.target,{focus:true});}));
+ document.getElementById('viewSelect').addEventListener('change',e=>{if(e.target.value==='documentation'){window.open('docs/documentacion.html','_blank','noopener');e.target.value=active;}else show(e.target.value,{focus:true});});
  document.getElementById('configure').addEventListener('click',()=>show('configuration',{focus:true}));
  document.getElementById('globalRun').addEventListener('click',()=>document.getElementById('run').click());
  document.addEventListener('click',e=>{const button=e.target.closest('[data-open-view]');if(button){e.preventDefault();show(button.dataset.openView,{focus:true});}});

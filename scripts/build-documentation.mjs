@@ -1,16 +1,16 @@
 import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
 import {marked} from 'marked';
 const read=path=>readFileSync(new URL('../'+path,import.meta.url),'utf8');
-let html=marked.parse(read('docs/documentacion.md'));
-html=html.replace(/<h1[^>]*>.*?<\/h1>/s,'');
-// Relative source/report links open the in-app reading views, never raw Markdown/JSON.
-html=html.replace(/href="([^"#]*\.(?:md|json))(?:#[^"]*)?"/g,(_,href)=>`href="#${/documentacion/.test(href)?'documentation':'evidence'}" data-open-view="${/documentacion/.test(href)?'documentation':'evidence'}"`);
-html=html.replace(/<table>/g,'<div class="table-responsive"><table class="table">').replace(/<\/table>/g,'</table></div>');
+let html=marked.parse(read('docs/documentacion.md')).replace(/<h1[^>]*>.*?<\/h1>/s,'');
+html=html.replace(/href="([^"#]*\.(?:md|json))(?:#[^"]*)?"/g,(_,href)=>`href="${/documentacion/.test(href)?'documentacion.html':'../index.html#evidence'}"`);
+html=html.replace(/<table>/g,'<div class="doc-table"><table class="table">').replace(/<\/table>/g,'</table></div>');
 const parts=html.split(/<h2[^>]*>(.*?)<\/h2>/s);
-let documentHtml=`<div class="document-intro">${parts[0]}</div>`;
-for(let i=1;i<parts.length;i+=2)documentHtml+=`<details class="reading-topic"${i===1?' open':''}><summary>${parts[i]}</summary><div class="reading-topic-body">${parts[i+1]||''}</div></details>`;
+let sections='',index='';
+for(let i=1;i<parts.length;i+=2){const id='tema-'+((i+1)/2);index+=`<a href="#${id}">${parts[i]}</a>`;sections+=`<section id="${id}"><h2>${parts[i]}</h2>${parts[i+1]||''}</section>`;}
+const page=`<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Documentación técnica | MenuShield</title><link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../assets/bootstrap.min.css"><link rel="stylesheet" href="documentation.css?v=guide-1"></head><body><a class="skip" href="#documento">Saltar al documento</a><header class="doc-topbar"><a class="doc-brand" href="../index.html">MenuShield <span>/ Documentación técnica</span></a><div><a class="btn btn-outline-primary" href="../index.html">Abrir simulador</a><button class="btn btn-primary" onclick="window.print()">Imprimir / guardar PDF</button></div></header><div class="doc-layout"><nav class="doc-index" aria-label="Índice del documento"><span>EN ESTE DOCUMENTO</span>${index}<a class="doc-evidence" href="../index.html#evidence">Ver evidencias →</a></nav><main id="documento"><div class="doc-cover"><span class="eyebrow">UNIVERSIDAD LIBRE · INGENIERÍA APLICADA</span><h1>MenuShield</h1><p class="doc-subtitle">Documentación del simulador de arquitecturas</p><div class="doc-tags"><span>Actividad 9</span><span>Modelo didáctico</span><span>Guía técnica</span></div><p>Una guía para comprender las entradas, las reglas de cálculo y la recomendación de arquitectura del aplicativo.</p></div><details class="doc-mobile-index"><summary>Índice del documento</summary><nav aria-label="Índice móvil">${index}</nav></details><div class="doc-intro">${parts[0]}</div>${sections}<footer>MenuShield · Documento técnico académico. Las cifras del simulador son estimaciones didácticas.<br><a href="../index.html">Volver al simulador</a> · <a href="../index.html#evidence">Consultar evidencias</a></footer></main></div></body></html>`;
+writeFileSync(new URL('../docs/documentacion.html',import.meta.url),page);
 const reports=Object.fromEntries(['model','browser','published'].map(name=>[name,JSON.parse(read('docs/'+(name==='published'?'published-tests':name+'-tests')+'.json'))]));
-const data={documentHtml,reports,deployment:JSON.parse(read('docs/deployment.json'))};
+const data={reports,deployment:JSON.parse(read('docs/deployment.json'))};
 mkdirSync(new URL('../assets/',import.meta.url),{recursive:true});
-writeFileSync(new URL('../assets/documentation-data.js',import.meta.url),'/* Generated from the versioned documentation and test reports. */\nwindow.MenuShieldReadingData = '+JSON.stringify(data).replace(/</g,'\\u003c')+';\n');
-console.log('Built in-app documentation and evidence from recorded reports.');
+writeFileSync(new URL('../assets/documentation-data.js',import.meta.url),'/* Generated from recorded test reports. */\nwindow.MenuShieldReadingData = '+JSON.stringify(data).replace(/</g,'\\u003c')+';\n');
+console.log('Built standalone documentation HTML and preserved evidence reports.');

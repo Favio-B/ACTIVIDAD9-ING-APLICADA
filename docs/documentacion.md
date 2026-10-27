@@ -21,7 +21,7 @@ Repositorio: https://github.com/Favio-B/ACTIVIDAD9-ING-APLICADA
 8. **Exportar CSV** valida y recalcula primero. Nunca combina métricas anteriores con límites nuevos. Si una entrada es inválida, explica el error y no descarga archivo.
 9. Ejecuta pruebas desde la página o los comandos descritos abajo. Restablecer recupera nombre, roles, escenario, límites, prioridad y resultados originales.
 
-En escritorio hay un menú a la izquierda y una única sección visible a la derecha. En móvil hay un selector de sección que permanece visible al desplazar. Configuración, Recomendación, Comparación, Cálculo, 3D, Modelo, Pruebas, Conclusiones, Documentación y Evidencias se abren por separado, sin perder controles ni resultados. Simular abre Recomendación y el 3D queda como vista secundaria. Los detalles de cumplimiento y descarte son desplegables; si no hay alternativa viable, los descartes se abren automáticamente. El cálculo y la exportación siguen funcionando si el archivo 3D no carga o el canvas no está disponible.
+En escritorio hay un menú a la izquierda y una única sección visible a la derecha. En móvil hay un selector de sección que permanece visible al desplazar. Configuración, Recomendación, Comparación, Cálculo, 3D, Modelo, Pruebas, Conclusiones, Evidencias se abre como sección y Documentación como guía independiente, sin perder controles ni resultados. Simular abre Recomendación y el 3D queda como vista secundaria. Los detalles de cumplimiento y descarte son desplegables; si no hay alternativa viable, los descartes se abren automáticamente. El cálculo y la exportación siguen funcionando si el archivo 3D no carga o el canvas no está disponible.
 
 ## Variables, límites y unidades
 
@@ -176,7 +176,7 @@ npm run test:browser
 | 11 | Documentación y sitio | Cumplido | README, modelo, matriz, pruebas locales y públicas. Sitio con HTTP 200, doce archivos coincidentes y 25/25 pruebas públicas en `docs/publicacion.md`. |
 | 12 | Sustentación | Cumplido | Conclusiones calculadas y modificación de una variable, historial de cinco ejecuciones, datos sustituidos, CSV y resultados visibles antes del 3D. |
 
-## Sustentación reproducible
+## Ejemplos de verificación de las conclusiones
 
 1. Restablece: Monolítica, latencia aproximada 484.066830 ms y capacidad 164.225098 ped/min.
 2. Cambia solo pedidos/min de 20 a 70: aparece pendiente; simula y muestra latencia 516.650514 ms. Usa historial y trazabilidad para conectar rho y q con el cambio.
@@ -206,4 +206,4 @@ Las referencias se conservan como bibliografía conceptual suministrada; esta re
 
 La sección Conclusiones reemplaza la antigua sección de Sustentación: muestra interpretación de la decisión real, condiciones, evidencia calculada, dependencia del escenario y limitaciones. Conserva un historial desplegable. Si no hay alternativa viable, las conclusiones lo declaran y explican los incumplimientos.
 
-Documentación contiene esta guía en HTML, dividida por temas con tablas adaptables. Evidencias muestra tres reportes registrados (modelo, navegador local y sitio público), con sus fechas, entradas, esperado y obtenido. Son instantáneas verificadas, no mediciones nuevas al abrir el lector. El generador `scripts/build-documentation.mjs` convierte fuentes y reportes locales en `assets/documentation-data.js`. `reader.js` los presenta sin solicitudes de red ni archivos Markdown abiertos por el usuario.
+Documentación abre esta guía en una página HTML independiente, con índice y formato de lectura. Se conserva la simulación en su pestaña. Evidencias muestra tres reportes registrados (modelo, navegador local y sitio público), con sus fechas, entradas, esperado y obtenido. Son instantáneas verificadas, no mediciones nuevas al abrir el lector. El generador `scripts/build-documentation.mjs` convierte fuentes y reportes locales en `assets/documentation-data.js`. `reader.js` presenta los reportes en Evidencias; la guía se genera como `docs/documentacion.html`, sin abrir archivos Markdown al usuario.

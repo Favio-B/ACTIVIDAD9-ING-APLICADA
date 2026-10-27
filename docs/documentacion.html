@@ -1,0 +1,405 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Documentación técnica | MenuShield</title><link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../assets/bootstrap.min.css"><link rel="stylesheet" href="documentation.css?v=guide-1"></head><body><a class="skip" href="#documento">Saltar al documento</a><header class="doc-topbar"><a class="doc-brand" href="../index.html">MenuShield <span>/ Documentación técnica</span></a><div><a class="btn btn-outline-primary" href="../index.html">Abrir simulador</a><button class="btn btn-primary" onclick="window.print()">Imprimir / guardar PDF</button></div></header><div class="doc-layout"><nav class="doc-index" aria-label="Índice del documento"><span>EN ESTE DOCUMENTO</span><a href="#tema-1">Objetivo y alcance</a><a href="#tema-2">Uso y jerarquía</a><a href="#tema-3">Variables, límites y unidades</a><a href="#tema-4">Arquitecturas y coeficientes</a><a href="#tema-5">Ecuaciones completas y exactas</a><a href="#tema-6">Restricciones, normalización y decisión</a><a href="#tema-7">Escenarios y comparación</a><a href="#tema-8">Coherencia de estado y trazabilidad</a><a href="#tema-9">Validación y evidencia</a><a href="#tema-10">Matriz de los 12 requisitos</a><a href="#tema-11">Ejemplos de verificación de las conclusiones</a><a href="#tema-12">Limitaciones y validación real</a><a href="#tema-13">Bibliografía conceptual suministrada</a><a href="#tema-14">Conclusiones, documentación y evidencias en pantalla</a><a class="doc-evidence" href="../index.html#evidence">Ver evidencias →</a></nav><main id="documento"><div class="doc-cover"><span class="eyebrow">UNIVERSIDAD LIBRE · INGENIERÍA APLICADA</span><h1>MenuShield</h1><p class="doc-subtitle">Documentación del simulador de arquitecturas</p><div class="doc-tags"><span>Actividad 9</span><span>Modelo didáctico</span><span>Guía técnica</span></div><p>Una guía para comprender las entradas, las reglas de cálculo y la recomendación de arquitectura del aplicativo.</p></div><details class="doc-mobile-index"><summary>Índice del documento</summary><nav aria-label="Índice móvil"><a href="#tema-1">Objetivo y alcance</a><a href="#tema-2">Uso y jerarquía</a><a href="#tema-3">Variables, límites y unidades</a><a href="#tema-4">Arquitecturas y coeficientes</a><a href="#tema-5">Ecuaciones completas y exactas</a><a href="#tema-6">Restricciones, normalización y decisión</a><a href="#tema-7">Escenarios y comparación</a><a href="#tema-8">Coherencia de estado y trazabilidad</a><a href="#tema-9">Validación y evidencia</a><a href="#tema-10">Matriz de los 12 requisitos</a><a href="#tema-11">Ejemplos de verificación de las conclusiones</a><a href="#tema-12">Limitaciones y validación real</a><a href="#tema-13">Bibliografía conceptual suministrada</a><a href="#tema-14">Conclusiones, documentación y evidencias en pantalla</a></nav></details><div class="doc-intro">
+<p>Universidad Libre · 2026-2. Revisión funcional: 26 de octubre de 2026.</p>
+</div><section id="tema-1"><h2>Objetivo y alcance</h2>
+<p>Relacionar entradas, reglas explícitas, indicadores y recomendación de arquitectura para pedidos por WhatsApp, IA y panel de cocina. Las salidas son <strong>estimaciones didácticas</strong>, no mediciones de una aplicación ni predicciones garantizadas. Se conserva el motor del commit <code>6e1c268</code>: no se ajustaron coeficientes para favorecer una arquitectura.</p>
+<p>Sitio: <a href="https://favio-b.github.io/ACTIVIDAD9-ING-APLICADA/">https://favio-b.github.io/ACTIVIDAD9-ING-APLICADA/</a>
+Repositorio: <a href="https://github.com/Favio-B/ACTIVIDAD9-ING-APLICADA">https://github.com/Favio-B/ACTIVIDAD9-ING-APLICADA</a></p>
+</section><section id="tema-2"><h2>Uso y jerarquía</h2>
+<ol>
+<li>Abre el sitio o <code>index.html</code> con sus archivos locales.</li>
+<li>Describe proyecto, necesidad y roles: Cliente, Cocina y Administrador. Estos campos solo dan contexto y aparecen en el CSV; <strong>no alteran las fórmulas</strong>.</li>
+<li>Selecciona prioridad, límites y escenario; modifica las cinco variables si corresponde.</li>
+<li>Pulsa <strong>Simular escenario</strong>: calcula primero y dirige el foco a la recomendación. Compara indicadores y motivos de descarte.</li>
+<li>Abre <strong>Cómo se obtuvo esta recomendación</strong> para ver entradas reales, sustituciones, intermedios, comprobaciones, normalización, pesos y contribuciones.</li>
+<li>Usa el 3D como exploración visual independiente. Seleccionar otra arquitectura no cambia la recomendación ni su puntaje.</li>
+<li>Al modificar un control aparece <strong>Cambios pendientes de simular</strong>. Las cifras visibles quedan identificadas como la última ejecución; no representan los controles nuevos.</li>
+<li><strong>Exportar CSV</strong> valida y recalcula primero. Nunca combina métricas anteriores con límites nuevos. Si una entrada es inválida, explica el error y no descarga archivo.</li>
+<li>Ejecuta pruebas desde la página o los comandos descritos abajo. Restablecer recupera nombre, roles, escenario, límites, prioridad y resultados originales.</li>
+</ol>
+<p>En escritorio hay un menú a la izquierda y una única sección visible a la derecha. En móvil hay un selector de sección que permanece visible al desplazar. Configuración, Recomendación, Comparación, Cálculo, 3D, Modelo, Pruebas, Conclusiones, Evidencias se abre como sección y Documentación como guía independiente, sin perder controles ni resultados. Simular abre Recomendación y el 3D queda como vista secundaria. Los detalles de cumplimiento y descarte son desplegables; si no hay alternativa viable, los descartes se abren automáticamente. El cálculo y la exportación siguen funcionando si el archivo 3D no carga o el canvas no está disponible.</p>
+</section><section id="tema-3"><h2>Variables, límites y unidades</h2>
+<div class="doc-table"><table class="table">
+<thead>
+<tr>
+<th>Campo</th>
+<th align="right">Rango</th>
+<th>Unidad</th>
+<th>Intervención y efecto esperado</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Pedidos (<code>rpm</code>, λ)</td>
+<td align="right">1–1000</td>
+<td>pedidos/min</td>
+<td>Demanda; aumenta utilización, espera y costo; modifica escalamiento micro.</td>
+</tr>
+<tr>
+<td>Usuarios (<code>concurrency</code>)</td>
+<td align="right">1–2000</td>
+<td>usuarios simultáneos</td>
+<td>Sobrecarga de CPU por pedido, no tasa de llegada independiente.</td>
+</tr>
+<tr>
+<td>CPU (<code>cores</code>)</td>
+<td align="right">1–32</td>
+<td>vCPU</td>
+<td>Aumenta capacidad y costo; reduce tiempo CPU por pedido.</td>
+</tr>
+<tr>
+<td>IA (<code>ai</code>)</td>
+<td align="right">0–100</td>
+<td>% de pedidos</td>
+<td>Aumenta demanda de CPU y componente fijo de latencia IA. 0 es válido.</td>
+</tr>
+<tr>
+<td>Red (<code>network</code>)</td>
+<td align="right">1–300</td>
+<td>ms</td>
+<td>Aumenta latencia según el factor de comunicación de cada alternativa.</td>
+</tr>
+<tr>
+<td>Latencia máxima</td>
+<td align="right">50–30000</td>
+<td>ms</td>
+<td>Restricción obligatoria <code>L &lt;= máximo</code>.</td>
+</tr>
+<tr>
+<td>Presupuesto</td>
+<td align="right">1–100000</td>
+<td>USD/mes</td>
+<td>Restricción obligatoria <code>C &lt;= presupuesto</code>.</td>
+</tr>
+<tr>
+<td>Disponibilidad mínima</td>
+<td align="right">90–99.999</td>
+<td>%</td>
+<td>Restricción obligatoria <code>A &gt;= mínimo</code>. Pedir 99.999 puede dejar cero viables porque el modelo acota A a 99.99.</td>
+</tr>
+<tr>
+<td>Prioridad</td>
+<td align="right">equilibrio, latencia, costo, disponibilidad</td>
+<td>categoría</td>
+<td>Selecciona pesos del puntaje; no cambia las estimaciones físicas.</td>
+</tr>
+</tbody></table></div>
+<p>Los controles de carga usan pasos enteros y los límites respetan los intervalos mostrados. El motor acepta números finitos dentro de rango; los pasos del control no son una restricción matemática adicional. Vacíos, NaN, infinitos o valores fuera de rango se rechazan antes de ejecutar y exportar.</p>
+</section><section id="tema-4"><h2>Arquitecturas y coeficientes</h2>
+<ul>
+<li><strong>Monolítica:</strong> un despliegue, baja sobrecarga y operación sencilla; dominios acoplados y escalamiento vertical.</li>
+<li><strong>Monolito modular:</strong> un despliegue con límites internos de dominio; mejor separación lógica, recursos compartidos.</li>
+<li><strong>Microservicios:</strong> servicios y despliegues independientes; escalamiento selectivo modelado a cambio de costo, red y complejidad.</li>
+</ul>
+<div class="doc-table"><table class="table">
+<thead>
+<tr>
+<th>Parámetro</th>
+<th align="right">Monolítica</th>
+<th align="right">Modular</th>
+<th align="right">Microservicios</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>base</code> (ms)</td>
+<td align="right">75</td>
+<td align="right">90</td>
+<td align="right">145</td>
+</tr>
+<tr>
+<td><code>net</code> (factor de red)</td>
+<td align="right">1</td>
+<td align="right">1.16</td>
+<td align="right">2.1</td>
+</tr>
+<tr>
+<td><code>eff</code> (eficiencia)</td>
+<td align="right">0.82</td>
+<td align="right">0.78</td>
+<td align="right">0.69</td>
+</tr>
+<tr>
+<td><code>coreCost</code> (factor CPU)</td>
+<td align="right">1</td>
+<td align="right">1.08</td>
+<td align="right">1.5</td>
+</tr>
+<tr>
+<td><code>fixed</code> (USD/mes)</td>
+<td align="right">10</td>
+<td align="right">17</td>
+<td align="right">55</td>
+</tr>
+<tr>
+<td><code>capacityFactor</code> (selector histórico)</td>
+<td align="right">1</td>
+<td align="right">1.08</td>
+<td align="right">1.45</td>
+</tr>
+<tr>
+<td><code>aiPenalty</code></td>
+<td align="right">0.48</td>
+<td align="right">0.46</td>
+<td align="right">0.43</td>
+</tr>
+<tr>
+<td><code>baseAvailability</code> (A0, %)</td>
+<td align="right">99.40</td>
+<td align="right">99.65</td>
+<td align="right">99.85</td>
+</tr>
+<tr>
+<td><code>availabilityPenalty</code></td>
+<td align="right">8</td>
+<td align="right">7</td>
+<td align="right">4</td>
+</tr>
+</tbody></table></div>
+<p><strong>Todos los coeficientes son hipótesis arbitrarias del ejercicio. No se extrajeron de los artículos citados.</strong> El motor y la referencia de coeficientes de la página comparten el objeto <code>archs</code>.</p>
+</section><section id="tema-5"><h2>Ecuaciones completas y exactas</h2>
+<p>Sea λ = pedidos/min, u = usuarios simultáneos, c = vCPU, a = IA/100 y N = latencia de red en ms.</p>
+<pre><code class="language-text">a = ai / 100
+d = (0.46 + min(u,2000)*0.00013)*(1 + a*aiPenalty)
+</code></pre>
+<p><code>d</code> se expresa en segundos CPU/pedido. El tope 2000 coincide con el máximo validado de usuarios.</p>
+<pre><code class="language-text">s = 1                                      para Monolítica
+s = 1.08                                   para Modular
+s = min(1.45, 1 + 0.45*λ/350)              para Microservicios
+cap = 60*c*eff/d*s                         pedidos/min
+rho = λ/cap                               fracción de utilización
+</code></pre>
+<p><code>capacityFactor</code> identifica históricamente la rama de escalamiento: si es 1 se usa s=1; si el id es modular se usa 1.08; en la otra rama se aplica el escalamiento micro. El factor micro alcanza 1.45 desde 350 ped/min. No hay creación real de instancias ni autoscaling.</p>
+<pre><code class="language-text">t = min(rho,0.97)
+q = 1 + t/(1-t)*0.18
+P = (rho-1)*2500+600 si rho &gt;= 1; de lo contrario P = 0
+L = base + net*N + d*1000/c*q + a*95 + P
+A = max(90,min(99.99,A0 - max(0,rho-0.75)*availabilityPenalty))
+C = 30*c*coreCost + fixed + 0.012*λ*43.2
+</code></pre>
+<p>L y P están en ms; A en %; C en USD/mes; q no tiene unidad. <strong>Los dos usos de rho en la espera utilizan el mismo valor acotado t</strong>, tanto numerador como denominador. Al saturarse hay una penalización adicional con salto de 600 ms en rho=1; el modelo no representa una cola estable real en saturación. La utilización no se recorta al 100 % en las salidas. La disponibilidad se acota a [90,99.99]. El costo usa 43.2 = (30<em>24</em>60)/1000 y es una función comparativa ficticia.</p>
+</section><section id="tema-6"><h2>Restricciones, normalización y decisión</h2>
+<p>Se excluye cualquier arquitectura si falla al menos una condición:</p>
+<pre><code class="language-text">L &lt;= maxLatency
+C &lt;= budget
+A &gt;= minAvailability
+rho &lt; 1
+</code></pre>
+<p>Para cada alternativa se muestran los cuatro valores, operadores, límites y resultados de comprobación. Solo las alternativas viables compiten por puntuación:</p>
+<pre><code class="language-text">nL   = 1/(1+L/500)
+nC   = 1/(1+C/100)
+nA   = max(0,(A-90)/10)
+nCap = min(1,cap/(cap+400))
+S = wL*nL + wC*nC + wA*nA + wCap*nCap
+</code></pre>
+<p>Las referencias son fijas: 500 ms, USD 100, intervalo 90–100 % y 400 ped/min. No se normaliza respecto al mínimo/máximo de las tres alternativas. El parámetro histórico <code>all</code> de <code>normalizedScore</code> se conserva por compatibilidad y no participa en la fórmula. El componente de capacidad favorece capacidad absoluta; no es una medición de margen real de concurrencia. Los cuatro componentes se muestran con seis decimales y se calculan con precisión completa antes de formatear.</p>
+<div class="doc-table"><table class="table">
+<thead>
+<tr>
+<th>Prioridad</th>
+<th align="right">Latencia</th>
+<th align="right">Costo</th>
+<th align="right">Disponibilidad</th>
+<th align="right">Capacidad</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Equilibrio</td>
+<td align="right">0.32</td>
+<td align="right">0.30</td>
+<td align="right">0.20</td>
+<td align="right">0.18</td>
+</tr>
+<tr>
+<td>Menor latencia</td>
+<td align="right">0.55</td>
+<td align="right">0.16</td>
+<td align="right">0.17</td>
+<td align="right">0.12</td>
+</tr>
+<tr>
+<td>Menor costo</td>
+<td align="right">0.15</td>
+<td align="right">0.60</td>
+<td align="right">0.15</td>
+<td align="right">0.10</td>
+</tr>
+<tr>
+<td>Mayor disponibilidad</td>
+<td align="right">0.16</td>
+<td align="right">0.14</td>
+<td align="right">0.55</td>
+<td align="right">0.15</td>
+</tr>
+</tbody></table></div>
+<p>Los pesos suman 1. Se elige máximo S entre viables. En empate exacto se conserva el orden original: Monolítica, Modular, Microservicios. Si no hay viables, la salida es explícitamente <strong>ninguna alternativa viable</strong>: no se elige la de menor incumplimiento ni se cambian restricciones silenciosamente. Los puntajes de descartadas son informativos y no participan en la selección.</p>
+</section><section id="tema-7"><h2>Escenarios y comparación</h2>
+<div class="doc-table"><table class="table">
+<thead>
+<tr>
+<th>Escenario</th>
+<th align="right">Pedidos/min</th>
+<th align="right">Usuarios</th>
+<th align="right">vCPU</th>
+<th align="right">IA %</th>
+<th align="right">Red ms</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Referencia</td>
+<td align="right">20</td>
+<td align="right">40</td>
+<td align="right">2</td>
+<td align="right">60</td>
+<td align="right">45</td>
+</tr>
+<tr>
+<td>Hora pico</td>
+<td align="right">170</td>
+<td align="right">300</td>
+<td align="right">4</td>
+<td align="right">70</td>
+<td align="right">85</td>
+</tr>
+<tr>
+<td>Crecimiento</td>
+<td align="right">430</td>
+<td align="right">900</td>
+<td align="right">8</td>
+<td align="right">85</td>
+<td align="right">95</td>
+</tr>
+<tr>
+<td>Personalizado</td>
+<td align="right">Valores configurados</td>
+<td align="right">Valores configurados</td>
+<td align="right">Valores configurados</td>
+<td align="right">Valores configurados</td>
+<td align="right">Valores configurados</td>
+</tr>
+</tbody></table></div>
+<p>Límites iniciales: 1200 ms, USD 200/mes, disponibilidad mínima 99 %, prioridad equilibrio. Un cambio de escenario actualiza los cinco controles y marca pendiente; no modifica presupuesto ni otros límites. Cada ejecución compara las tres arquitecturas con idénticas entradas. Entre escenarios cambian varios factores: una diferencia no aísla causalidad. Para sensibilidad causal del modelo, cambia una sola entrada conservando las demás.</p>
+</section><section id="tema-8"><h2>Coherencia de estado y trazabilidad</h2>
+<p><code>model.js:execute</code> valida y crea una copia recursivamente inmutable con entradas, límites, prioridad, contexto, resultados intermedios y finales, comprobaciones, puntajes y ganadora. <code>app.js:simulate</code> es la única entrada de cálculo de la interfaz. Tabla, gráfico, explicación, historial, animación y CSV consumen ese objeto. <code>estimate</code>, <code>feasible</code>, <code>normalizedScore</code> y <code>decide</code> conservan las reglas anteriores.</p>
+<ul>
+<li>Editar controles marca pendiente y detiene la animación; no cambia la ejecución ya calculada.</li>
+<li>Redimensionar o cambiar el indicador del gráfico redibuja la misma ejecución; no lee límites nuevos para decidir.</li>
+<li>Exportar recalcula y valida primero; las tres filas incluyen id, fecha, entradas, restricciones, prioridad, indicadores, puntaje, selección y motivos de descarte.</li>
+<li>Descriptivos que empiecen con caracteres de fórmula se protegen al exportar CSV; los textos de usuario se escapan en HTML.</li>
+<li>El selector del 3D es exploración visual. Se sincroniza inicialmente con la ganadora, si existe, y después permite explorar sin cambiar resultados.</li>
+<li>Cambiar velocidad o cámara no recalcula. Repetir vuelve a validar/calcular los controles actuales antes del nuevo recorrido.</li>
+<li>El recorrido dura 10 s a velocidad 1× por fines didácticos; no representa la latencia ni volumen real. Con movimiento reducido empieza pausado.</li>
+</ul>
+</section><section id="tema-9"><h2>Validación y evidencia</h2>
+<p><a href="../index.html#evidence">Tabla de pruebas ejecutadas</a>, <a href="../index.html#evidence">salidas del modelo</a>, <a href="../index.html#evidence">salidas de navegador</a>. Las pruebas y sus entradas, valores esperados y valores obtenidos están en archivos versionados. En la página se conservan las ocho pruebas iniciales y se añaden dieciséis, con detalles desplegables.</p>
+<pre><code class="language-sh">npm ci
+npm run build:css
+npm test
+npm run test:browser
+</code></pre>
+<p><code>npm test</code> requiere Git y el commit histórico <code>6e1c268</code> para cotejar que el motor no cambió. El navegador utiliza Edge instalado en Windows; en Linux/macOS puede instalarse Chromium con <code>npx playwright install chromium</code>. Para comprobar el sitio: definir <code>MENUSHIELD_URL=https://favio-b.github.io/ACTIVIDAD9-ING-APLICADA/</code> y ejecutar <code>npm run test:browser</code>. Capturas y reportes de publicación se guardan en <code>artifacts/</code>, excluido de Git.</p>
+</section><section id="tema-10"><h2>Matriz de los 12 requisitos</h2>
+<div class="doc-table"><table class="table">
+<thead>
+<tr>
+<th>#</th>
+<th>Requisito</th>
+<th>Estado</th>
+<th>Evidencia concreta</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Configuración del proyecto</td>
+<td>Cumplido</td>
+<td>Nombre, necesidad y roles descriptivos; cinco entradas, prioridad y restricciones calculables. <code>index.html</code>, <code>app.js:metadata/validateControls</code>.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Tres alternativas</td>
+<td>Cumplido</td>
+<td>Monolítica, modular y microservicios, documentadas y evaluadas sobre la misma copia de entradas. <code>model.js:archs/execute</code>.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Variables relevantes</td>
+<td>Cumplido</td>
+<td>Cinco controles con unidades, rangos y efectos; <code>model.js:ranges</code>, ayuda desplegable y sección Variables.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Modelo matemático completo</td>
+<td>Cumplido</td>
+<td>Fórmulas, coeficientes, espera acotada, saturación, escalamiento, límites, normalización y pesos. <code>model.js</code> y trazabilidad en <code>app.js</code>.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Escenarios</td>
+<td>Cumplido</td>
+<td>Referencia, hora pico, crecimiento y personalizado. <code>model.js:scenarios</code> y selector.</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Indicadores</td>
+<td>Cumplido</td>
+<td>Latencia, capacidad, utilización, disponibilidad y costo, con unidades en resumen, tabla, gráfico y CSV.</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Comparación equivalente</td>
+<td>Cumplido</td>
+<td>Misma entrada en cada ejecución; gráfico seleccionable de cinco indicadores; advertencia de cambios múltiples entre escenarios.</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Recomendación verificable</td>
+<td>Cumplido</td>
+<td>Cuatro filtros obligatorios, después puntaje; motivos cuantificados de descarte y declaración explícita si no hay viable.</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Interfaz accesible y adaptable</td>
+<td>Cumplido con alcance declarado</td>
+<td>Playwright: 360, 390, 768, 1280 px; teclado, etiquetas, estados, movimiento reducido; inspección visual de capturas. No se certifica auditoría WCAG ni lector de pantalla real.</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Validación y pruebas</td>
+<td>Cumplido</td>
+<td>24 pruebas de modelo (incluyen las 8 originales), 25 de navegador; regresión contra 300 estimaciones y 400 decisiones del commit anterior. <code>docs/pruebas.md</code>.</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Documentación y sitio</td>
+<td>Cumplido</td>
+<td>README, modelo, matriz, pruebas locales y públicas. Sitio con HTTP 200, doce archivos coincidentes y 25/25 pruebas públicas en <code>docs/publicacion.md</code>.</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Sustentación</td>
+<td>Cumplido</td>
+<td>Conclusiones calculadas y modificación de una variable, historial de cinco ejecuciones, datos sustituidos, CSV y resultados visibles antes del 3D.</td>
+</tr>
+</tbody></table></div>
+</section><section id="tema-11"><h2>Ejemplos de verificación de las conclusiones</h2>
+<ol>
+<li>Restablece: Monolítica, latencia aproximada 484.066830 ms y capacidad 164.225098 ped/min.</li>
+<li>Cambia solo pedidos/min de 20 a 70: aparece pendiente; simula y muestra latencia 516.650514 ms. Usa historial y trazabilidad para conectar rho y q con el cambio.</li>
+<li>Restablece; duplica solo CPU de 2 a 4: capacidad 328.450196 ped/min. Explica que el costo también crece.</li>
+<li>Hora pico con USD 200: ninguna viable. Identifica cada límite incumplido. Con USD 350 y equilibrio: Monolítica.</li>
+<li>Crecimiento, USD 650, disponibilidad mínima 99 y latencia máxima 1200: Microservicios. Muestra comparación, restricciones y puntajes.</li>
+<li>Cambia prioridad y verifica pesos y contribuciones. Cambiar prioridad no tiene por qué cambiar siempre la ganadora.</li>
+</ol>
+<p>Estos números son comprobaciones del cálculo, nunca salidas fijas de la interfaz.</p>
+</section><section id="tema-12"><h2>Limitaciones y validación real</h2>
+<p>No hay backend, llamadas a WhatsApp/Meta, Gemini o Sheets, almacenamiento de pedidos ni despliegue real de las arquitecturas. Los roles son descriptivos, no autenticación. No se simulan cuotas de API, memoria, tasas de fallo correlacionadas, almacenamiento, traffic bursts, circuit breakers ni costos reales. p95 no proviene de una distribución observada; disponibilidad no es SLA; normalizaciones y pesos son elecciones del ejercicio. El 3D ilustra un pedido y no constituye carga o telemetría. La revisión de accesibilidad cubre controles etiquetados, teclado, estados y movimiento reducido; no se realizó prueba con lector de pantalla real ni certificación WCAG.</p>
+<p>Para validar conclusiones: implementar prototipos equivalentes, mantener infraestructura y entradas iguales, generar carga con JMeter o k6, medir percentiles empíricos p50/p95/p99, throughput, colas, errores, CPU/memoria/red, latencias de IA/API, fallos y recuperación, disponibilidad observada y facturación. Repetir mediciones, reportar variabilidad y calibrar coeficientes con datos separados de validación. Con esos datos se puede contrastar el modelo sin prometer validez externa por los resultados actuales.</p>
+</section><section id="tema-13"><h2>Bibliografía conceptual suministrada</h2>
+<ul>
+<li>Tapia, F., et al. (2020). <em>From Monolithic Systems to Microservices: A Comparative Study of Performance</em>. Applied Sciences, 10, 5797. DOI: 10.3390/app10175797.</li>
+<li>Blinowski, G., Ojdowska, A., &amp; Przybylek, A. (2022). <em>Monolithic vs. Microservice Architecture: A Performance and Scalability Evaluation</em>. IEEE Access. DOI: 10.1109/ACCESS.2022.3152803.</li>
+<li>Al-Debagy, O., &amp; Martinek, P. (2018). <em>A Comparative Review of Microservices and Monolithic Architectures</em>. CINTI 2018.</li>
+<li>Sunardi, A., &amp; Suharjito (2019). <em>MVC Architecture: A Comparative Study Between Laravel Framework and Slim Framework in Freelancer Project Monitoring System Web Based</em>. Procedia Computer Science 157, 134-141. DOI: 10.1016/j.procs.2019.08.150.</li>
+</ul>
+<p>Las referencias se conservan como bibliografía conceptual suministrada; esta revisión no atribuye ni valida coeficientes numéricos a partir de ellas.</p>
+</section><section id="tema-14"><h2>Conclusiones, documentación y evidencias en pantalla</h2>
+<p>La sección Conclusiones reemplaza la antigua sección de Sustentación: muestra interpretación de la decisión real, condiciones, evidencia calculada, dependencia del escenario y limitaciones. Conserva un historial desplegable. Si no hay alternativa viable, las conclusiones lo declaran y explican los incumplimientos.</p>
+<p>Documentación abre esta guía en una página HTML independiente, con índice y formato de lectura. Se conserva la simulación en su pestaña. Evidencias muestra tres reportes registrados (modelo, navegador local y sitio público), con sus fechas, entradas, esperado y obtenido. Son instantáneas verificadas, no mediciones nuevas al abrir el lector. El generador <code>scripts/build-documentation.mjs</code> convierte fuentes y reportes locales en <code>assets/documentation-data.js</code>. <code>reader.js</code> presenta los reportes en Evidencias; la guía se genera como <code>docs/documentacion.html</code>, sin abrir archivos Markdown al usuario.</p>
+</section><footer>MenuShield · Documento técnico académico. Las cifras del simulador son estimaciones didácticas.<br><a href="../index.html">Volver al simulador</a> · <a href="../index.html#evidence">Consultar evidencias</a></footer></main></div></body></html>

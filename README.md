@@ -39,7 +39,7 @@ Para probar la versión publicada, define `MENUSHIELD_URL` con la URL del sitio 
 
 ## Documentación y evidencia
 
-- [Modelo completo, coeficientes, reglas y matriz de los 12 requisitos](https://favio-b.github.io/ACTIVIDAD9-ING-APLICADA/#documentation).
+- [Modelo completo, coeficientes, reglas y matriz de los 12 requisitos](https://favio-b.github.io/ACTIVIDAD9-ING-APLICADA/docs/documentacion.html).
 - [Pruebas ejecutadas: entradas, esperado y obtenido](https://favio-b.github.io/ACTIVIDAD9-ING-APLICADA/#evidence).
 - [Reporte del modelo](docs/model-tests.json) y [reporte de navegador local](docs/browser-tests.json).
 - [Verificación de publicación](docs/publicacion.md).
@@ -48,8 +48,8 @@ El código conserva los coeficientes del motor anterior; la interfaz no contiene
 
 ## Navegación por secciones
 
-El menú izquierdo abre una sola sección: Configuración, Recomendación, Comparación, Cálculo explicado, Exploración 3D, Modelo, Pruebas, Conclusiones, Documentación o Evidencias. En móvil hay un selector fijo al desplazar. Los controles y la ejecución se conservan al cambiar de vista; el botón global Simular calcula y abre Recomendación. Los enlaces directos, el historial del navegador y el teclado también funcionan. Los detalles de cumplimiento y descarte se despliegan a petición; si no hay viable, los descartes se abren automáticamente.
+El menú izquierdo permite consultar las secciones: Configuración, Recomendación, Comparación, Cálculo explicado, Exploración 3D, Modelo, Pruebas, Conclusiones, Documentación o Evidencias. En móvil hay un selector fijo al desplazar. Los controles y la ejecución se conservan al cambiar de vista; el botón global Simular calcula y abre Recomendación. Los enlaces directos, el historial del navegador y el teclado también funcionan. Los detalles de cumplimiento y descarte se despliegan a petición; si no hay viable, los descartes se abren automáticamente.
 
 ## Conclusiones y lector integrado
 
-Conclusiones interpreta la ejecución actual sin alterar el motor. Documentación se presenta como HTML con temas desplegables y tablas. Evidencias muestra reportes registrados del modelo, navegador local y sitio público, con fecha, versión y detalle esperado/obtenido. Se generan con `npm run build:docs` a partir de fuentes versionadas; el usuario no necesita abrir Markdown ni JSON. `npm run build` reconstruye estilos y contenido de lectura. Las lecturas funcionan sin servidor ni internet.
+Conclusiones interpreta la ejecución actual sin alterar el motor. Documentación se abre desde un enlace en otra pestaña, como guía HTML con índice, secciones y tablas. Evidencias muestra reportes registrados del modelo, navegador local y sitio público, con fecha, versión y detalle esperado/obtenido. Se generan con `npm run build:docs` a partir de fuentes versionadas; el usuario no necesita abrir Markdown ni JSON. `npm run build` reconstruye estilos y contenido de lectura. Las lecturas funcionan sin servidor ni internet.

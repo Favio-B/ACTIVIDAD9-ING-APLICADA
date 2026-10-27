@@ -2,8 +2,7 @@
 'use strict';
 (() => {
  const data=window.MenuShieldReadingData;
- if(!data){$('documentationContent').textContent='No se pudo cargar la documentación. Recarga el aplicativo.';$('evidenceContent').textContent='No se pudieron cargar las evidencias.';return;}
- $('documentationContent').innerHTML=data.documentHtml;
+ if(!data){$('evidenceContent').textContent='No se pudieron cargar las evidencias.';return;}
  const date=value=>new Date(value).toLocaleString('es-CO',{timeZone:'America/Bogota',dateStyle:'medium',timeStyle:'short'});
  const labels={rpm:'Pedidos por minuto',concurrency:'Usuarios simultáneos',cores:'CPU (vCPU)',ai:'Participación de IA (%)',network:'Red (ms)',budget:'Presupuesto (USD/mes)',maxLatency:'Latencia máxima (ms)',minAvailability:'Disponibilidad mínima (%)',winner:'Arquitectura seleccionada',latency:'Latencia estimada (ms)',cap:'Capacidad (ped/min)',rho:'Utilización (fracción)',penalty:'Penalización (ms)',priority:'Prioridad',weights:'Ponderaciones',score:'Puntuación',name:'Arquitectura',failures:'Restricciones incumplidas',views:'Secciones verificadas',sameExecution:'Se conserva la ejecución',base:'Referencia',peak:'Hora pico',growth:'Crecimiento',b:'Entradas de referencia',l:'Restricciones',viewport:'Ancho de pantalla',content:'Ancho del contenido',columns:'Columnas',rows:'Filas verificadas',complete:'Recorrido completado',dynamic:'Conclusiones calculadas',renamed:'Nombre actualizado',reports:'Reportes disponibles',rawMarkdownLinks:'Enlaces a Markdown',topics:'Temas disponibles',visibleSections:'Secciones visibles',resultHeight:'Altura del resultado (px)'};
  function readable(value){

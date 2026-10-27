@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-27T03:16:31.436Z",
+  "timestamp": "2026-10-27T03:24:03.944Z",
   "url": "file:///C:/Users/febm6/OneDrive/Escritorio/ACTIVIDAD9-ING-APLICADA/index.html",
   "tests": [
     {
@@ -304,7 +304,7 @@
     {
       "name": "Menú muestra una sola sección y conserva datos",
       "input": {},
-      "expected": "Diez vistas, misma ejecución y controles",
+      "expected": "Nueve vistas y documentación independiente; datos conservados",
       "actual": {
         "views": [
           "configuration",
@@ -315,7 +315,6 @@
           "model",
           "tests",
           "conclusions",
-          "documentation",
           "evidence"
         ],
         "sameExecution": true
@@ -345,13 +344,15 @@
       "pass": true
     },
     {
-      "name": "Documentación y evidencias en vistas legibles",
+      "name": "Documentación independiente y evidencias conservadas",
       "input": {},
-      "expected": "HTML, matriz y tres reportes sin enlaces MD",
+      "expected": "Guía HTML con índice; abre en otra pestaña sin perder la simulación",
       "actual": {
         "topics": 14,
         "reports": 3,
-        "rawMarkdownLinks": 0
+        "rawMarkdownLinks": 0,
+        "opensNewTab": true,
+        "printLayout": true
       },
       "pass": true
     },
