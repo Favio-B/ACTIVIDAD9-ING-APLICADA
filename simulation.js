@@ -6,17 +6,18 @@
   panel.id = 'interactiveLab';
   panel.innerHTML = `<div class="lab-heading"><h2>El recorrido de tu pedido <span class="tiny">/ Vista 3D</span></h2><span id="processState" class="process-state" data-state="ready" role="status">○ Listo para simular</span></div>
     <p class="tiny">Sigue un pedido representativo. La duración de la animación es ilustrativa; las métricas corresponden al modelo del escenario.</p>
-    <div class="lab-toolbar"><label>Arquitectura en pantalla<select class="form-select" id="viewArch"><option value="mono">Monolítica</option><option value="modular" selected>Monolito modular</option><option value="micro">Microservicios</option></select></label><label>Velocidad del recorrido<select class="form-select" id="playSpeed"><option value="0.5">0,5× · lenta</option><option value="1" selected>1× · normal</option><option value="2">2× · rápida</option><option value="4">4× · muy rápida</option></select></label></div>
+    <div class="lab-toolbar"><label>Exploración visual (no cambia la recomendación)<select class="form-select" id="viewArch"><option value="mono">Monolítica</option><option value="modular" selected>Monolito modular</option><option value="micro">Microservicios</option></select></label><label>Velocidad del recorrido<select class="form-select" id="playSpeed"><option value="0.5">0,5× · lenta</option><option value="1" selected>1× · normal</option><option value="2">2× · rápida</option><option value="4">4× · muy rápida</option></select></label></div>
     <div class="lab-stage"><span class="lab-badge" id="sceneBadge">Vista 3D · arrastra para girar</span><canvas id="architecture3d" tabindex="0" role="img" aria-label="Arquitectura 3D. Arrastra o usa las flechas para girar; usa más y menos para acercar y alejar."></canvas></div>
     <div class="lab-controls"><button id="playPause" class="btn btn-outline-primary secondary" disabled>Pausar</button><button id="nextStep" class="btn btn-outline-primary secondary" disabled>Siguiente paso</button><button id="replay" class="btn btn-outline-primary secondary">Repetir recorrido</button><button id="cameraReset" class="btn btn-outline-primary secondary">Centrar vista</button></div>
     <p class="tiny">Arrastra para girar · rueda o teclas + / − para zoom · flechas para rotar. Cambia la arquitectura para comparar sus límites de despliegue.</p>
     <div class="lab-legend"><span><i class="legend-dot" aria-hidden="true"></i>Pendiente</span><span><i class="legend-dot pending" aria-hidden="true"></i>En proceso</span><span><i class="legend-dot done" aria-hidden="true"></i>Completado</span></div><progress id="processProgress" class="lab-progress" max="5" value="0" aria-label="Avance del pedido"></progress>
     <ol class="lab-steps" id="processSteps"><li>1. WhatsApp</li><li>2. IA</li><li>3. Pedido</li><li>4. Cocina</li><li>5. Respuesta</li></ol>
     <div id="processStatus" class="lab-status" aria-live="polite">Pulsa «Simular escenario» para iniciar el recorrido del pedido.</div><div id="processLog" class="lab-log"></div>`;
-  $('headline').closest('section').before(panel);
+  $('visualSupport').replaceChildren(panel);
   const canvas = $('architecture3d'), ctx = canvas.getContext('2d');
+  if(!ctx){panel.textContent='Vista 3D no disponible. El cálculo y la recomendación funcionan de forma independiente.';return;}
   let elapsed = 0, running = false, paused = false, started = false, lastStage = -1;
-  let snapshot = input(), modeled = archs.map(a => estimate(snapshot,a));
+  let snapshot = MenuShieldApp.lastRun.inputs, modeled = MenuShieldApp.lastRun.results;
   let yaw = -.48, pitch = .48, zoom = 1, drag = null, previous = 0;
   const duration = 2000;
   const labels = ['WhatsApp','IA','Pedidos','Cocina','Respuesta'];
@@ -80,7 +81,7 @@
       snapshot.ai===0?'La IA se omite: el escenario usa 0 % de pedidos con IA. El pedido continúa con datos estructurados.':`La IA interpreta los productos y cantidades. En este escenario participa en el ${snapshot.ai} % de los pedidos; este recorrido ilustra esa rama.`,
       `Se valida y registra el pedido con ${snapshot.cores} vCPU. Utilización estimada de ${r.name}: ${fmt(r.rho*100,1)} %. ${r.rho>=1?'La demanda supera la capacidad: se acumulan pedidos en cola.':'El modelo mantiene margen de capacidad.'}`,
       `Cocina recibe el pedido. ${$('viewArch').value==='micro'?'Se comunica con un servicio desplegado de forma independiente.':'El módulo de cocina pertenece al mismo despliegue.'} Red base: ${snapshot.network} ms.`,
-      `Se confirma el pedido al cliente. Latencia estimada de ${r.name}: ${fmt(r.latency,0)} ms. Revisa la comparación de las tres arquitecturas debajo.`
+      `Se confirma el pedido al cliente. Latencia estimada de ${r.name}: ${fmt(r.latency,0)} ms. La comparación de las tres arquitecturas y la recomendación están arriba.`
     ];
     if(stage!==lastStage||complete){
       $('processStatus').textContent=complete?'Recorrido completado. '+descriptions[4]:`Paso ${stage+1} de 5 · ${descriptions[stage]}`;
@@ -90,11 +91,10 @@
     if(complete){running=false;$('playPause').disabled=true;$('nextStep').disabled=true;$('sceneBadge').textContent='Recorrido completado · explora la vista 3D';}
   }
   function setState(state,label){const badge=$('processState');if(badge.textContent!==label){badge.dataset.state=state;badge.textContent=label;}}
-  window.startInteractiveSimulation=()=>{
-    if(!validate(input())||!validLimits(limits())){setState('error','! Revisa los valores');simulate();return;}
-    simulate();snapshot=input();modeled=archs.map(a=>estimate(snapshot,a));elapsed=0;lastStage=-1;started=true;running=true;paused=false;
+  window.startInteractiveSimulation=(execution)=>{
+    const run=execution||MenuShieldApp.simulate();if(!run)return;
+    snapshot=run.inputs;modeled=run.results;if(run.winner)$('viewArch').value=run.winner.id;elapsed=0;lastStage=-1;started=true;running=true;paused=false;
     $('playPause').disabled=false;$('nextStep').disabled=false;$('playPause').textContent='Pausar';$('sceneBadge').textContent='Pedido en proceso · vista 3D';updateStage();
-    panel.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});
     if(matchMedia('(prefers-reduced-motion: reduce)').matches){paused=true;$('playPause').textContent='Continuar';updateStage();}
   };
   $('playPause').onclick=()=>{paused=!paused;$('playPause').textContent=paused?'Continuar':'Pausar';updateStage();};
@@ -103,14 +103,14 @@
   $('viewArch').onchange=()=>{lastStage=-1;if(started)updateStage();drawScene();};
   $('cameraReset').onclick=()=>{yaw=-.48;pitch=.48;zoom=1;drawScene();};
   function cancel(){running=false;started=false;elapsed=0;lastStage=-1;$('playPause').disabled=true;$('nextStep').disabled=true;$('processProgress').value=0;[...$('processSteps').children].forEach((li,i)=>{li.className='';li.textContent=`${i+1}. ${labels[i]}`;});setState('ready','○ Listo para simular');$('processStatus').textContent='Configuración actualizada. Pulsa «Simular escenario» para iniciar un nuevo recorrido.';$('processLog').textContent='';$('sceneBadge').textContent='Vista 3D · arrastra para girar';drawScene();}
-  document.querySelector('aside').addEventListener('input',cancel);
-  $('scenario').addEventListener('change',cancel);$('reset').addEventListener('click',cancel);
+  document.addEventListener('menushield:pending',cancel);
+  document.addEventListener('menushield:computed',cancel);
   canvas.addEventListener('pointerdown',e=>{drag={x:e.clientX,y:e.clientY};canvas.setPointerCapture(e.pointerId);});
   canvas.addEventListener('pointermove',e=>{if(!drag)return;yaw+=(e.clientX-drag.x)*.008;pitch=Math.max(-.5,Math.min(1.1,pitch+(e.clientY-drag.y)*.008));drag={x:e.clientX,y:e.clientY};drawScene();});
   canvas.addEventListener('pointerup',()=>drag=null);canvas.addEventListener('pointercancel',()=>drag=null);
   canvas.addEventListener('wheel',e=>{e.preventDefault();zoom=Math.max(.65,Math.min(1.6,zoom-e.deltaY*.001));drawScene();},{passive:false});
   canvas.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','+','=','-'].includes(e.key))return;e.preventDefault();if(e.key==='ArrowLeft')yaw-=.12;if(e.key==='ArrowRight')yaw+=.12;if(e.key==='ArrowUp')pitch=Math.min(1.1,pitch+.1);if(e.key==='ArrowDown')pitch=Math.max(-.5,pitch-.1);if(e.key==='+'||e.key==='=')zoom=Math.min(1.6,zoom+.1);if(e.key==='-')zoom=Math.max(.65,zoom-.1);drawScene();});
-  new ResizeObserver(drawScene).observe(canvas);
+  if(typeof ResizeObserver!=='undefined')new ResizeObserver(drawScene).observe(canvas);
   function frame(now){const delta=previous?Math.min(now-previous,100):0;previous=now;if(running&&!paused){elapsed=Math.min(duration*5,elapsed+delta*Number($('playSpeed').value));updateStage();drawScene();}requestAnimationFrame(frame);}
   document.addEventListener('visibilitychange',()=>previous=0);
   drawScene();requestAnimationFrame(frame);

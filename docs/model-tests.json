@@ -1,0 +1,449 @@
+{
+  "timestamp": "2026-10-27T02:48:22.061Z",
+  "command": "npm test",
+  "tests": [
+    {
+      "id": 1,
+      "name": "Entradas inválidas rechazadas",
+      "input": {
+        "rpm": 20,
+        "concurrency": 40,
+        "cores": 0,
+        "ai": 60,
+        "network": 45
+      },
+      "expected": false,
+      "actual": false,
+      "pass": true
+    },
+    {
+      "id": 2,
+      "name": "Carga mayor aumenta utilización",
+      "input": {
+        "base": {
+          "rpm": 20,
+          "concurrency": 40,
+          "cores": 2,
+          "ai": 60,
+          "network": 45
+        },
+        "rpm": 70
+      },
+      "expected": true,
+      "actual": true,
+      "pass": true
+    },
+    {
+      "id": 3,
+      "name": "Más CPU incrementa capacidad",
+      "input": {
+        "base": {
+          "rpm": 20,
+          "concurrency": 40,
+          "cores": 2,
+          "ai": 60,
+          "network": 45
+        },
+        "cores": 4
+      },
+      "expected": true,
+      "actual": true,
+      "pass": true
+    },
+    {
+      "id": 4,
+      "name": "Sobrecarga incrementa latencia",
+      "input": {
+        "base": {
+          "rpm": 20,
+          "concurrency": 40,
+          "cores": 2,
+          "ai": 60,
+          "network": 45
+        },
+        "rpm": 900
+      },
+      "expected": true,
+      "actual": true,
+      "pass": true
+    },
+    {
+      "id": 5,
+      "name": "Presupuesto restrictivo descarta opciones",
+      "input": {
+        "b": {
+          "rpm": 20,
+          "concurrency": 40,
+          "cores": 2,
+          "ai": 60,
+          "network": 45
+        },
+        "budget": 1
+      },
+      "expected": true,
+      "actual": true,
+      "pass": true
+    },
+    {
+      "id": 6,
+      "name": "Resultados finitos en escenarios oficiales",
+      "input": {
+        "base": {
+          "rpm": 20,
+          "concurrency": 40,
+          "cores": 2,
+          "ai": 60,
+          "network": 45
+        },
+        "peak": {
+          "rpm": 170,
+          "concurrency": 300,
+          "cores": 4,
+          "ai": 70,
+          "network": 85
+        },
+        "growth": {
+          "rpm": 430,
+          "concurrency": 900,
+          "cores": 8,
+          "ai": 85,
+          "network": 95
+        }
+      },
+      "expected": true,
+      "actual": true,
+      "pass": true
+    },
+    {
+      "id": 7,
+      "name": "Disponibilidad dentro del rango",
+      "input": {
+        "base": {
+          "rpm": 20,
+          "concurrency": 40,
+          "cores": 2,
+          "ai": 60,
+          "network": 45
+        },
+        "peak": {
+          "rpm": 170,
+          "concurrency": 300,
+          "cores": 4,
+          "ai": 70,
+          "network": 85
+        },
+        "growth": {
+          "rpm": 430,
+          "concurrency": 900,
+          "cores": 8,
+          "ai": 85,
+          "network": 95
+        }
+      },
+      "expected": true,
+      "actual": true,
+      "pass": true
+    },
+    {
+      "id": 8,
+      "name": "Decisión sin opciones válidas explica fallo",
+      "input": {
+        "budget": 1,
+        "maxLatency": 50,
+        "minAvailability": 99.999
+      },
+      "expected": null,
+      "actual": null,
+      "pass": true
+    },
+    {
+      "id": 9,
+      "name": "Referencia recomienda Monolítica",
+      "input": {
+        "b": {
+          "rpm": 20,
+          "concurrency": 40,
+          "cores": 2,
+          "ai": 60,
+          "network": 45
+        },
+        "l": {
+          "maxLatency": 1200,
+          "budget": 200,
+          "minAvailability": 99
+        }
+      },
+      "expected": "mono",
+      "actual": "mono",
+      "pass": true
+    },
+    {
+      "id": 10,
+      "name": "Latencia de referencia",
+      "input": {
+        "b": {
+          "rpm": 20,
+          "concurrency": 40,
+          "cores": 2,
+          "ai": 60,
+          "network": 45
+        }
+      },
+      "expected": 484.07,
+      "actual": 484.06683049501834,
+      "pass": true
+    },
+    {
+      "id": 11,
+      "name": "Cambiar solo pedidos/min a 70",
+      "input": {
+        "rpm": 70,
+        "concurrency": 40,
+        "cores": 2,
+        "ai": 60,
+        "network": 45
+      },
+      "expected": 516.65,
+      "actual": 516.6505135501318,
+      "pass": true
+    },
+    {
+      "id": 12,
+      "name": "Capacidad con 2 CPU",
+      "input": {
+        "b": {
+          "rpm": 20,
+          "concurrency": 40,
+          "cores": 2,
+          "ai": 60,
+          "network": 45
+        }
+      },
+      "expected": 164.23,
+      "actual": 164.22509786747702,
+      "pass": true
+    },
+    {
+      "id": 13,
+      "name": "Capacidad con 4 CPU",
+      "input": {
+        "rpm": 20,
+        "concurrency": 40,
+        "cores": 4,
+        "ai": 60,
+        "network": 45
+      },
+      "expected": 328.45,
+      "actual": 328.45019573495404,
+      "pass": true
+    },
+    {
+      "id": 14,
+      "name": "Hora pico: presupuesto 200",
+      "input": {
+        "rpm": 170,
+        "concurrency": 300,
+        "cores": 4,
+        "ai": 70,
+        "network": 85,
+        "maxLatency": 1200,
+        "budget": 200,
+        "minAvailability": 99
+      },
+      "expected": null,
+      "actual": null,
+      "pass": true
+    },
+    {
+      "id": 15,
+      "name": "Hora pico: presupuesto 350",
+      "input": {
+        "rpm": 170,
+        "concurrency": 300,
+        "cores": 4,
+        "ai": 70,
+        "network": 85,
+        "budget": 350
+      },
+      "expected": "mono",
+      "actual": "mono",
+      "pass": true
+    },
+    {
+      "id": 16,
+      "name": "Crecimiento: presupuesto 650",
+      "input": {
+        "rpm": 430,
+        "concurrency": 900,
+        "cores": 8,
+        "ai": 85,
+        "network": 95,
+        "maxLatency": 1200,
+        "budget": 650,
+        "minAvailability": 99
+      },
+      "expected": "micro",
+      "actual": "micro",
+      "pass": true
+    },
+    {
+      "id": 17,
+      "name": "Prioridad usa sus pesos",
+      "input": {
+        "priorities": {
+          "balance": {
+            "label": "Equilibrio general",
+            "weights": [
+              0.32,
+              0.3,
+              0.2,
+              0.18
+            ]
+          },
+          "speed": {
+            "label": "Menor latencia",
+            "weights": [
+              0.55,
+              0.16,
+              0.17,
+              0.12
+            ]
+          },
+          "cost": {
+            "label": "Menor costo",
+            "weights": [
+              0.15,
+              0.6,
+              0.15,
+              0.1
+            ]
+          },
+          "availability": {
+            "label": "Mayor disponibilidad",
+            "weights": [
+              0.16,
+              0.14,
+              0.55,
+              0.15
+            ]
+          }
+        }
+      },
+      "expected": true,
+      "actual": true,
+      "pass": true
+    },
+    {
+      "id": 18,
+      "name": "Saturación aplica penalización",
+      "input": {
+        "rpm": 1000,
+        "concurrency": 40,
+        "cores": 1,
+        "ai": 60,
+        "network": 45
+      },
+      "expected": true,
+      "actual": true,
+      "pass": true
+    },
+    {
+      "id": 19,
+      "name": "Espera acota ambos usos de rho a 0.97",
+      "input": {
+        "rpm": 1000,
+        "concurrency": 40,
+        "cores": 1,
+        "ai": 60,
+        "network": 45
+      },
+      "expected": 6.82,
+      "actual": 6.819999999999995,
+      "pass": true
+    },
+    {
+      "id": 20,
+      "name": "Entradas no finitas y límites inválidos",
+      "input": {
+        "ai": "NaN",
+        "budget": 0
+      },
+      "expected": true,
+      "actual": true,
+      "pass": true
+    },
+    {
+      "id": 21,
+      "name": "Escalamiento micro limitado a 1.45",
+      "input": {
+        "rpm": 1000
+      },
+      "expected": 1.45,
+      "actual": 1.45,
+      "pass": true
+    },
+    {
+      "id": 22,
+      "name": "Ejecución conserva copia inmutable",
+      "input": {
+        "b": {
+          "rpm": 20,
+          "concurrency": 40,
+          "cores": 2,
+          "ai": 60,
+          "network": 45
+        },
+        "l": {
+          "maxLatency": 1200,
+          "budget": 200,
+          "minAvailability": 99
+        }
+      },
+      "expected": true,
+      "actual": true,
+      "pass": true
+    },
+    {
+      "id": 23,
+      "name": "Puntaje y decisión comparten resultados",
+      "input": {
+        "b": {
+          "rpm": 20,
+          "concurrency": 40,
+          "cores": 2,
+          "ai": 60,
+          "network": 45
+        },
+        "l": {
+          "maxLatency": 1200,
+          "budget": 200,
+          "minAvailability": 99
+        }
+      },
+      "expected": true,
+      "actual": true,
+      "pass": true
+    },
+    {
+      "id": 24,
+      "name": "Cero IA y límites extremos son válidos",
+      "input": {
+        "rpm": 20,
+        "concurrency": 40,
+        "cores": 2,
+        "ai": 0,
+        "network": 45
+      },
+      "expected": true,
+      "actual": true,
+      "pass": true
+    }
+  ],
+  "legacy": {
+    "commit": "6e1c268",
+    "vectors": 100,
+    "architectureComparisons": 300,
+    "priorityDecisions": 400,
+    "identical": true
+  }
+}
