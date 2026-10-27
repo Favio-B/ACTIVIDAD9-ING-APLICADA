@@ -30,7 +30,7 @@ function checksHtml(checks){return '<ul class="checks-list">'+checks.map(c=>`<li
 function renderExecution(run){
  const w=run.winner,p=priorities[run.priority];
  $('headline').textContent=w?`Arquitectura recomendada: ${w.name}`:'Ninguna arquitectura cumple las restricciones: no hay alternativa viable';
- $('headline').classList.toggle('no-winner',!w);
+ $('headline').classList.toggle('no-winner',!w);$('rejectionDetails').open=!w;
  $('reasons').textContent=run.reason+(w?` Puntaje: ${fmt(w.scoring.total,6)} / 1. Prioridad: ${p.label}.`:'');
  $('constraint').textContent=`Restricciones de esta ejecución: latencia <= ${fmt(run.limits.maxLatency)} ms; costo <= USD ${fmt(run.limits.budget)}/mes; disponibilidad >= ${fmt(run.limits.minAvailability,3)} %; utilización < 100 %.`;
  const metrics=w?[['Latencia estimada',fmt(w.latency)+' ms'],['Capacidad',fmt(w.cap)+' ped/min'],['Utilización',fmt(w.rho*100)+' %'],['Disponibilidad',fmt(w.availability,3)+' %'],['Costo estimado','USD '+fmt(w.cost)+'/mes']]:[['Alternativas viables','0 / 3']];
@@ -75,7 +75,7 @@ function simulate(options={}){
  $('runState').dataset.state='current';$('runState').textContent=`✓ Resultados actualizados · ${lastRun.metadata.id} · ${priorities[lastRun.priority].label}`;$('recommendation').dataset.state='current';
  renderExecution(lastRun);document.dispatchEvent(new CustomEvent('menushield:computed',{detail:lastRun}));if(options.focus)focusDecision();return lastRun;
 }
-function focusDecision(){$('decisionTitle').focus({preventScroll:true});$('recommendation').scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});}
+function focusDecision(){MenuShieldNavigation.show('results');$('decisionTitle').focus({preventScroll:true});$('recommendation').scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});}
 function buildCsv(run){
  const head=['Ejecucion','Fecha_UTC','Proyecto_descriptivo','Necesidad_descriptiva','Roles_descriptivos','Escenario','Prioridad','Pedidos_min','Usuarios','vCPU','IA_pct','Red_ms','Limite_latencia_ms','Limite_costo_USD_mes','Min_disponibilidad_pct','Arquitectura','Latencia_p95_aprox_ms','Capacidad_ped_min','CPU_pct','Disponibilidad_pct','Costo_USD_mes','Cumple','Puntaje','Seleccionada','Motivos_descarte'];
  const rows=run.results.map(r=>[run.metadata.id,run.metadata.timestamp,run.metadata.project,run.metadata.description,run.metadata.roles.join(' / '),run.metadata.scenario,run.priority,...Object.values(run.inputs),run.limits.maxLatency,run.limits.budget,run.limits.minAvailability,r.name,r.latency,r.cap,r.rho*100,r.availability,r.cost,r.feasible?'SI':'NO',r.scoring.total,run.winner?.id===r.id?'SI':'NO',r.checks.filter(c=>!c.pass).map(checkText).join(' | ')]);
@@ -101,7 +101,7 @@ document.querySelector('aside').addEventListener('input',markDirty);
 document.querySelector('aside').addEventListener('change',markDirty);
 $('scenario').addEventListener('change',()=>{const scenario=scenarios[$('scenario').value];if(scenario)for(const [k,v] of Object.entries(scenario))$(k).value=v;updateLabels();markDirty();});
 $('run').addEventListener('click',()=>{const run=simulate({focus:true});if(run&&typeof window.startInteractiveSimulation==='function'){try{window.startInteractiveSimulation(run);}catch(e){$('visualSupport').textContent='La animación no está disponible. Los resultados numéricos siguen siendo válidos.';}}});
-$('reset').addEventListener('click',()=>{$('project').value='MenuShield';$('description').selectedIndex=0;document.querySelectorAll('[name=roles]').forEach(el=>el.checked=true);for(const [k,v] of Object.entries(scenarios.base))$(k).value=v;for(const [k,v] of Object.entries(defaultLimits))$(k).value=v;$('quality').value='balance';$('scenario').value='base';updateLabels();simulate();});
+$('reset').addEventListener('click',()=>{$('project').value='MenuShield';$('description').selectedIndex=0;document.querySelectorAll('[name=roles]').forEach(el=>el.checked=true);for(const [k,v] of Object.entries(scenarios.base))$(k).value=v;for(const [k,v] of Object.entries(defaultLimits))$(k).value=v;$('quality').value='balance';$('scenario').value='base';updateLabels();simulate({focus:true});});
 $('export').addEventListener('click',csv);$('tests').addEventListener('click',tests);$('chartMetric').addEventListener('change',()=>{if(lastRun)draw(lastRun);});
 window.addEventListener('resize',()=>{if(lastRun)draw(lastRun);});
 window.MenuShieldApp={get lastRun(){return lastRun;},get dirty(){return dirty;},simulate,buildCsv};

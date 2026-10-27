@@ -14,7 +14,7 @@ Compara Monolítica, Monolito modular y Microservicios con las mismas entradas. 
 4. Modificar controles muestra **Cambios pendientes de simular**. Exportar valida y recalcula primero para mantener todo el CSV coherente.
 5. Explora el 3D sin alterar la decisión calculada. Tiene pausa, pasos, velocidad, rotación, zoom y control por teclado; es opcional para el cálculo.
 
-No necesitas servidor ni internet: abre `index.html` conservando `model.js`, `app.js`, `simulation.js`, `theme.css`, `simulation.css` y `assets/` en sus ubicaciones.
+No necesitas servidor ni internet: abre `index.html` conservando `model.js`, `navigation.js`, `app.js`, `simulation.js`, `theme.css`, `simulation.css` y `assets/` en sus ubicaciones.
 
 ## Estilos
 
@@ -31,7 +31,7 @@ npm run test:browser
 
 - 24 pruebas del modelo, incluidas las ocho originales.
 - Regresión contra el commit `6e1c268`: 300 estimaciones y 400 decisiones idénticas.
-- 21 comprobaciones de navegador: CSV, invalidación, escenarios, prioridades, 3D independiente, teclado, movimiento reducido, fallback y anchos 360/390/768/1280.
+- 23 comprobaciones de navegador: CSV, invalidación, escenarios, prioridades, 3D independiente, teclado, movimiento reducido, fallback y anchos 360/390/768/1280.
 - Windows usa Edge instalado; otros sistemas necesitan `npx playwright install chromium`.
 - `npm test` necesita Git y el commit de referencia. Las capturas se guardan en `artifacts/` (no versionado).
 
@@ -45,3 +45,7 @@ Para probar la versión publicada, define `MENUSHIELD_URL` con la URL del sitio 
 - [Verificación de publicación](docs/publicacion.md).
 
 El código conserva los coeficientes del motor anterior; la interfaz no contiene recomendaciones predeterminadas. Las comparaciones entre escenarios cambian varias variables; para explicar una causa se modifica una sola entrada. Hace falta validación empírica con prototipos, carga, métricas observadas y costos reales para extrapolar los resultados.
+
+## Navegación por secciones
+
+El menú izquierdo abre una sola sección: Configuración, Recomendación, Comparación, Cálculo explicado, Exploración 3D, Modelo, Pruebas o Sustentación. En móvil hay un selector fijo al desplazar. Los controles y la ejecución se conservan al cambiar de vista; el botón global Simular calcula y abre Recomendación. Los enlaces directos, el historial del navegador y el teclado también funcionan. Los detalles de cumplimiento y descarte se despliegan a petición; si no hay viable, los descartes se abren automáticamente.

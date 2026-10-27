@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-27T02:53:29.180Z",
+  "timestamp": "2026-10-27T03:02:51.319Z",
   "url": "file:///C:/Users/febm6/OneDrive/Escritorio/ACTIVIDAD9-ING-APLICADA/index.html",
   "tests": [
     {
@@ -254,12 +254,12 @@
         {
           "viewport": 768,
           "content": 768,
-          "columns": "720px"
+          "columns": "185px 519px"
         },
         {
           "viewport": 1280,
           "content": 1280,
-          "columns": "320px 892px"
+          "columns": "220px 988px"
         }
       ],
       "pass": true
@@ -298,6 +298,37 @@
       "actual": {
         "fallback": true,
         "winner": "mono"
+      },
+      "pass": true
+    },
+    {
+      "name": "Menú muestra una sola sección y conserva datos",
+      "input": {},
+      "expected": "Ocho vistas, misma ejecución y controles",
+      "actual": {
+        "views": [
+          "configuration",
+          "results",
+          "comparison",
+          "calculation",
+          "visual",
+          "model",
+          "tests",
+          "presentation"
+        ],
+        "sameExecution": true
+      },
+      "pass": true
+    },
+    {
+      "name": "Selector móvil y botón global",
+      "input": {
+        "width": 360
+      },
+      "expected": "Cambios de sección sin desplazamiento largo",
+      "actual": {
+        "visibleSections": 1,
+        "resultHeight": 1690
       },
       "pass": true
     },

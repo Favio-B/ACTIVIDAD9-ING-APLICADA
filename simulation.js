@@ -95,7 +95,7 @@
     const run=execution||MenuShieldApp.simulate();if(!run)return;
     snapshot=run.inputs;modeled=run.results;if(run.winner)$('viewArch').value=run.winner.id;elapsed=0;lastStage=-1;started=true;running=true;paused=false;
     $('playPause').disabled=false;$('nextStep').disabled=false;$('playPause').textContent='Pausar';$('sceneBadge').textContent='Pedido en proceso · vista 3D';updateStage();
-    if(matchMedia('(prefers-reduced-motion: reduce)').matches){paused=true;$('playPause').textContent='Continuar';updateStage();}
+    if($('visualSupport').hidden||matchMedia('(prefers-reduced-motion: reduce)').matches){paused=true;$('playPause').textContent='Continuar';updateStage();}
   };
   $('playPause').onclick=()=>{paused=!paused;$('playPause').textContent=paused?'Continuar':'Pausar';updateStage();};
   $('nextStep').onclick=()=>{paused=true;$('playPause').textContent='Continuar';elapsed=Math.min(5*duration,(Math.floor(elapsed/duration)+1)*duration);updateStage();drawScene();};
@@ -103,6 +103,7 @@
   $('viewArch').onchange=()=>{lastStage=-1;if(started)updateStage();drawScene();};
   $('cameraReset').onclick=()=>{yaw=-.48;pitch=.48;zoom=1;drawScene();};
   function cancel(){running=false;started=false;elapsed=0;lastStage=-1;$('playPause').disabled=true;$('nextStep').disabled=true;$('processProgress').value=0;[...$('processSteps').children].forEach((li,i)=>{li.className='';li.textContent=`${i+1}. ${labels[i]}`;});setState('ready','○ Listo para simular');$('processStatus').textContent='Configuración actualizada. Pulsa «Simular escenario» para iniciar un nuevo recorrido.';$('processLog').textContent='';$('sceneBadge').textContent='Vista 3D · arrastra para girar';drawScene();}
+  document.addEventListener('menushield:viewchange',e=>{if(e.detail.view!=='visual'&&running){paused=true;$('playPause').textContent='Continuar';updateStage();}});
   document.addEventListener('menushield:pending',cancel);
   document.addEventListener('menushield:computed',cancel);
   canvas.addEventListener('pointerdown',e=>{drag={x:e.clientX,y:e.clientY};canvas.setPointerCapture(e.pointerId);});

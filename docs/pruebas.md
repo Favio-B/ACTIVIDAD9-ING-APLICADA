@@ -35,11 +35,11 @@ Comando: `npm test`. Motor histórico: commit `6e1c268`; 100 vectores determinis
 
 Tolerancia de las referencias numéricas: 0,02. Las comparaciones contra el motor anterior usan igualdad exacta. [JSON completo](model-tests.json).
 
-## Navegador: 21/21 comprobaciones aprobadas
+## Navegador: 23/23 comprobaciones aprobadas
 
-Comando: `npm run test:browser`. URL local indicada en [JSON completo](browser-tests.json). Capturas 360, 390, 768 y 1280 px en `artifacts/`.
+Comando: `npm run test:browser`. Reporte local completo en [browser-tests.json](browser-tests.json). Se verifican ocho secciones independientes, conservación de estado, selector móvil, controles numéricos y ausencia de errores. Capturas en `artifacts/`.
 
-| Comprobación | Entradas / acción | Esperado | Obtenido | Estado |
+| Comprobación | Entrada o acción | Esperado | Obtenido | Estado |
 |---|---|---|---|---|
 | Referencia y jerarquía | `{}` | Monolítica; recomendación antes de 3D | `{"winner": "Monolítica", "latency": 484.06683049501834}` | APROBADA |
 | Cambios pendientes y resize coherente | `{"budget": 1}` | Aviso; ejecución anterior intacta | `{"pending": true, "budgetOfDisplayedExecution": 200}` | APROBADA |
@@ -56,11 +56,13 @@ Comando: `npm run test:browser`. URL local indicada en [JSON completo](browser-t
 | 3D no altera decisión; pausa y pasos | `{}` | Misma ejecución al explorar | `{"sameExecution": true, "complete": true}` | APROBADA |
 | Cálculo visible y foco en recomendación | `{}` | Valores, pesos, restricciones y foco | `{"trace": true, "focus": "decisionTitle"}` | APROBADA |
 | Navegación, etiquetas y estados accesibles | `{}` | Enlaces y nombres disponibles por teclado | `{"links": 4, "labels": true, "states": true}` | APROBADA |
-| Matriz adaptable | `{"widths": [360, 390, 768, 1280]}` | Sin desbordamiento; captura por ancho | `[{"viewport": 360, "content": 360, "columns": "332px"}, {"viewport": 390, "content": 390, "columns": "362px"}, {"viewport": 768, "content": 768, "columns": "720px"}, {"viewport": 1280, "content": 1280, "columns": "320px 892px"}]` | APROBADA |
+| Matriz adaptable | `{"widths": [360, 390, 768, 1280]}` | Sin desbordamiento; captura por ancho | `[{"viewport": 360, "content": 360, "columns": "332px"}, {"viewport": 390, "content": 390, "columns": "362px"}, {"viewport": 768, "content": 768, "columns": "185px 519px"}, {"viewport": 1280, "content": 1280, "columns": "220px 988px"}]` | APROBADA |
 | Pruebas visibles conservadas y ampliadas | `{}` | 24/24 aprobadas | `"24 / 24 pruebas aprobadas"` | APROBADA |
 | Gráficos usan el último resultado | `{}` | Cinco indicadores; sin recalcular decisión | `{"indicators": 5, "sameExecution": true}` | APROBADA |
 | Motor funciona sin archivo 3D | `{}` | Recomendación y CSV sin animación | `{"recommendation": true, "csv": true}` | APROBADA |
 | Canvas 3D no disponible | `{}` | Mensaje alternativo y cálculo válido | `{"fallback": true, "winner": "mono"}` | APROBADA |
+| Menú muestra una sola sección y conserva datos | `{}` | Ocho vistas, misma ejecución y controles | `{"views": ["configuration", "results", "comparison", "calculation", "visual", "model", "tests", "presentation"], "sameExecution": true}` | APROBADA |
+| Selector móvil y botón global | `{"width": 360}` | Cambios de sección sin desplazamiento largo | `{"visibleSections": 1, "resultHeight": 1690}` | APROBADA |
 | Consola y recursos normales | `{}` | Cero errores | `{"runtime": 0, "console": 0, "resources": 0}` | APROBADA |
 
 ## Fallos reproducidos antes de corregir
