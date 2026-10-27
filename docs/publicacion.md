@@ -1,36 +1,13 @@
-# Verificación de GitHub Pages
+# Publicación verificada de MenuShield
 
-**Sitio verificado:** https://favio-b.github.io/ACTIVIDAD9-ING-APLICADA/
+Sitio: https://favio-b.github.io/ACTIVIDAD9-ING-APLICADA/
 
-Versión funcional: [`f2a6453`](https://github.com/Favio-B/ACTIVIDAD9-ING-APLICADA/commit/f2a6453417f8f7672acd97319a6fd140c95d2bb7). Comprobación UTC: `2026-10-27T03:04:07Z`.
+Versión funcional comprobada: `51413eeb6e0d36dfb1a89fc08524c8c2491eaa70`. Momento UTC: `2026-10-27T03:17:55Z`.
 
-Se descargaron los archivos desde GitHub Pages con HTTP 200 y se compararon sus hashes SHA-256 con los archivos locales. Se normalizaron únicamente los finales de línea CRLF/LF. **Los diez archivos coinciden.** La prueba de navegador se ejecutó contra la URL pública normal, sin cambiar código ni usar resultados locales como sustituto.
+Se verificaron doce archivos con HTTP 200 y hashes iguales a los locales (normalizando solo finales de línea). La suite pública aprobó 25/25 comprobaciones, sin errores de ejecución, consola ni recursos en la carga normal. El motor conserva 24 pruebas y coincidencia exacta contra 300 estimaciones y 400 decisiones históricas.
 
-| Archivo | HTTP | Coincide con local |
-|---|---:|---|
-| `index.html` | 200 | Sí |
-| `model.js` | 200 | Sí |
-| `navigation.js` | 200 | Sí |
-| `app.js` | 200 | Sí |
-| `simulation.js` | 200 | Sí |
-| `theme.css` | 200 | Sí |
-| `simulation.css` | 200 | Sí |
-| `assets/tailwind.css` | 200 | Sí |
-| `assets/bootstrap.min.css` | 200 | Sí |
-| `assets/favicon.svg` | 200 | Sí |
+Las diez secciones incluyen Conclusiones, Documentación y Evidencias. Los temas se muestran en HTML dentro del aplicativo, con tablas y resultados legibles; no requieren abrir Markdown ni JSON. Las conclusiones responden al escenario real. Los reportes del lector son instantáneas registradas, con su fecha y versión, y no mediciones en vivo.
 
-## Resultado público
+Los cambios posteriores de evidencia solo actualizan reportes y contenido de lectura generado. El detalle verificable está en `published-tests.json` y `deployment.json`, y también puede consultarse visualmente desde el menú Evidencias.
 
-**23/23 comprobaciones aprobadas**, incluyendo las seis referencias de decisión/sensibilidad, exportación coherente, invalidación, prioridades, teclado, movimiento reducido, cuatro anchos, navegación, cinco gráficos y funcionamiento sin animación. Cero errores de ejecución, consola, solicitudes fallidas o HTTP en la carga normal.
-
-- [Reporte público completo: entradas, esperado y obtenido](published-tests.json).
-- [Hashes, archivos, HTTP, versión y momento de comprobación](deployment.json).
-- [Pruebas locales y del motor](pruebas.md).
-
-Se detectó y corrigió un 404 del icono durante la primera comprobación pública. Se repitió la suite completa tras añadir `assets/favicon.svg`; el reporte enlazado corresponde a la ejecución final aprobada. Los fallos del archivo 3D y canvas de las pruebas de fallback son intencionales y aislados.
-
-El commit de evidencia posterior solo añade documentación y reportes; la versión funcional identificada arriba contiene el código, estilos y recursos comprobados. Los 12 requisitos funcionales se consideran cubiertos con el alcance de la [matriz](documentacion.md#matriz-de-los-12-requisitos). No se ejecutaron lector de pantalla real, certificación WCAG, pruebas físicas de teléfonos ni benchmarks contra proveedores reales.
-
-El despliegue se actualizó por la rama `main` del repositorio existente. Si hubiera una regresión futura, puede revertirse el cambio mediante un nuevo commit de reversión y volver a comprobar el sitio; no se requieren migraciones ni backend.
-
-La actualización de navegación muestra una sola sección a la vez mediante menú lateral o selector móvil fijo. Las dos pruebas añadidas verifican conservación de datos, ocho vistas, controles globales y reducción de desplazamiento.
+Límites: no se realizaron pruebas con lector de pantalla real, teléfonos físicos ni infraestructura de producción. El modelo es didáctico y sus cifras no son SLA, percentiles medidos ni cotizaciones.

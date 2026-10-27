@@ -1,12 +1,12 @@
 {
-  "timestampUTC": "2026-10-27T03:04:07Z",
-  "commit": "f2a6453417f8f7672acd97319a6fd140c95d2bb7",
+  "timestampUTC": "2026-10-27T03:17:55Z",
+  "commit": "51413eeb6e0d36dfb1a89fc08524c8c2491eaa70",
   "url": "https://favio-b.github.io/ACTIVIDAD9-ING-APLICADA/",
   "files": [
     {
       "file": "index.html",
       "http": 200,
-      "sha256_normalized": "adbc699ebc8fb0affb96391f409d2c8c8e76926f9497d52a370e2544d9b72977",
+      "sha256_normalized": "35e58b249e4d0c789304063360ec7cf84becc9245be01a9a4447836de9d4541b",
       "matchesLocal": true
     },
     {
@@ -18,13 +18,13 @@
     {
       "file": "navigation.js",
       "http": 200,
-      "sha256_normalized": "84d8224556c50ced9fb07d3efa02d7b7129e4ea37733ab097febe3de573f113b",
+      "sha256_normalized": "03423c70f0be3ce59630d11b1abaa37dc38b572d80c184d1abf7110216e6100b",
       "matchesLocal": true
     },
     {
       "file": "app.js",
       "http": 200,
-      "sha256_normalized": "56df8bd8705bc25fa84b35ad0f39f739d3ef136750a4c60c52e5b6d22d8a5de6",
+      "sha256_normalized": "e520baa37f2bc4052fd3bdc345a9a538804994e6f7040f411c192a244b712638",
       "matchesLocal": true
     },
     {
@@ -34,15 +34,27 @@
       "matchesLocal": true
     },
     {
+      "file": "reader.js",
+      "http": 200,
+      "sha256_normalized": "880931a9c22fdb287661d83af18e08ea845f472e3b5c47a3bbf22dc0e87cef6b",
+      "matchesLocal": true
+    },
+    {
       "file": "theme.css",
       "http": 200,
-      "sha256_normalized": "44e9a48ff63d4562c71b09839083cd0c4cdf6b35dfd195267ab6f1a24090ade0",
+      "sha256_normalized": "f35f7e117e7b5d4628d5df78899ddf89bee4930b031aa9a0b395745d8e675e21",
       "matchesLocal": true
     },
     {
       "file": "simulation.css",
       "http": 200,
       "sha256_normalized": "7b893db046cb74c1d18fb1e9c1d7f3c1658b26daededd065f18d2b7e8c722105",
+      "matchesLocal": true
+    },
+    {
+      "file": "assets/documentation-data.js",
+      "http": 200,
+      "sha256_normalized": "d482b18635f71f8e9ba87aada64b763cccc4ea3e0b2219989315b0767c839e33",
       "matchesLocal": true
     },
     {
