@@ -74,3 +74,7 @@ La solución guarda una ejecución inmutable, marca pendiente al editar, redibuj
 Se ejecutaron navegación por teclado, nombres de controles, estados con texto y `role=status`, foco en recomendación, preferencia de movimiento reducido y revisión visual de capturas. No se ejecutó un lector de pantalla real, una certificación WCAG ni pruebas físicas en teléfonos. El fallo del archivo 3D y la falta de canvas se inyectan intencionalmente; la revisión de consola sin errores corresponde a la carga normal.
 
 Las pruebas no son benchmarks del sistema real. No se midieron latencias de WhatsApp/Gemini ni infraestructura cloud. [Estado de la publicación y prueba del sitio](publicacion.md).
+
+## Verificación final del sitio público
+
+La misma suite pasó **21/21** contra GitHub Pages; cero errores de consola, ejecución y recursos. Se verificaron por hash los nueve archivos de la versión funcional. Ver [publicación](publicacion.md), [reporte público completo](published-tests.json) y [hashes de despliegue](deployment.json). Los 12 requisitos funcionales quedan cubiertos con los límites de alcance declarados.
