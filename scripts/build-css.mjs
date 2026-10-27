@@ -1,0 +1,12 @@
+import { mkdirSync, copyFileSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
+const root = fileURLToPath(new URL('../', import.meta.url));
+process.chdir(root);
+mkdirSync('assets', { recursive: true });
+copyFileSync('node_modules/bootstrap/dist/css/bootstrap.min.css', 'assets/bootstrap.min.css');
+copyFileSync('node_modules/bootstrap/LICENSE', 'assets/bootstrap.LICENSE');
+copyFileSync('node_modules/tailwindcss/LICENSE', 'assets/tailwind.LICENSE');
+const result = spawnSync(process.execPath, ['node_modules/@tailwindcss/cli/dist/index.mjs', '-i', 'styles/tailwind.css', '-o', 'assets/tailwind.css', '--minify'], { stdio: 'inherit' });
+if (result.error) throw result.error;
+process.exitCode = result.status ?? 1;

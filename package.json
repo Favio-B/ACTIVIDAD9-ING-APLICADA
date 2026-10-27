@@ -1,0 +1,13 @@
+{
+  "devDependencies": {
+    "@tailwindcss/cli": "4.3.3",
+    "bootstrap": "5.3.8",
+    "tailwindcss": "4.3.3"
+  },
+  "name": "menushield-architecture-lab",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build:css": "node scripts/build-css.mjs"
+  }
+}

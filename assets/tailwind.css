@@ -1,0 +1,2 @@
+/*! tailwindcss v4.3.3 | MIT License | https://tailwindcss.com */
+@layer theme{:root,:host{--tw-spacing:.25rem;--tw-radius-2xl:1rem}}@layer base,components;@layer utilities{.tw\:flex{display:flex}.tw\:grid{display:grid}.tw\:flex-wrap{flex-wrap:wrap}.tw\:items-start{align-items:flex-start}.tw\:gap-4{gap:calc(var(--tw-spacing) * 4)}.tw\:gap-5{gap:calc(var(--tw-spacing) * 5)}.tw\:rounded-2xl{border-radius:var(--tw-radius-2xl)}@media (min-width:64rem){.tw\:lg\:grid-cols-\[320px_minmax\(0\,1fr\)\]{grid-template-columns:320px minmax(0,1fr)}}}
