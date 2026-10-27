@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-27T02:48:26.608Z",
+  "timestamp": "2026-10-27T02:53:29.180Z",
   "url": "file:///C:/Users/febm6/OneDrive/Escritorio/ACTIVIDAD9-ING-APLICADA/index.html",
   "tests": [
     {
@@ -315,5 +315,6 @@
   ],
   "consoleErrors": [],
   "runtimeErrors": [],
-  "requestFailures": []
+  "requestFailures": [],
+  "httpErrors": []
 }

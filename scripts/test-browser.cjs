@@ -5,13 +5,13 @@ const {pathToFileURL}=require('node:url');
 const assert=require('node:assert/strict');
 const url=process.env.MENUSHIELD_URL||pathToFileURL(path.resolve(__dirname,'../index.html')).href;
 const published=url.startsWith('https:');
-const report={timestamp:new Date().toISOString(),url,tests:[],consoleErrors:[],runtimeErrors:[],requestFailures:[]};
+const report={timestamp:new Date().toISOString(),url,tests:[],consoleErrors:[],runtimeErrors:[],requestFailures:[],httpErrors:[]};
 function parseCsv(content){return content.replace(/^\uFEFF/,'').split('\r\n').map(line=>{const values=[];let text='',quoted=false;for(let i=0;i<line.length;i++){const c=line[i];if(c==='"'){if(quoted&&line[i+1]==='"'){text+='"';i++;}else quoted=!quoted;}else if(c===';'&&!quoted){values.push(text);text='';}else text+=c;}values.push(text);return values;});}
 (async()=>{
  await fs.mkdir('artifacts',{recursive:true});
  const browser=await chromium.launch({headless:true,...(process.platform==='win32'?{channel:'msedge'}:{})});
  const page=await browser.newPage({viewport:{width:1280,height:900},reducedMotion:'reduce'});
- page.on('pageerror',e=>report.runtimeErrors.push(e.message));page.on('console',m=>{if(m.type()==='error')report.consoleErrors.push(m.text());});page.on('requestfailed',r=>report.requestFailures.push(r.url()));
+ page.on('pageerror',e=>report.runtimeErrors.push(e.message));page.on('console',m=>{if(m.type()==='error')report.consoleErrors.push(m.text());});page.on('requestfailed',r=>report.requestFailures.push(r.url()));page.on('response',r=>{if(r.status()>=400)report.httpErrors.push({url:r.url(),status:r.status()});});
  const test=async(name,input,expected,fn)=>{try{const actual=await fn();report.tests.push({name,input,expected,actual,pass:true});console.log('PASS',name);}catch(e){report.tests.push({name,input,expected,actual:e.message,pass:false});throw e;}};
  const run=()=>page.evaluate(()=>MenuShieldApp.lastRun);
  const simulate=()=>page.click('#run');
@@ -39,6 +39,6 @@ function parseCsv(content){return content.replace(/^\uFEFF/,'').split('\r\n').ma
  await test('Gráficos usan el último resultado',{},'Cinco indicadores; sin recalcular decisión',async()=>{const before=await run();for(const k of ['latency','cap','rho','availability','cost']){await page.selectOption('#chartMetric',k);assert.match(await page.locator('#chartDescription').textContent(),new RegExp(before.metadata.id));}assert.deepEqual(await run(),before);return {indicators:5,sameExecution:true};});
  await test('Motor funciona sin archivo 3D',{},'Recomendación y CSV sin animación',async()=>{const p=await browser.newPage();await p.route('**/simulation.js',r=>r.abort());await p.goto(url);await p.click('#run');assert.match(await p.locator('#headline').textContent(),/Monolítica/);assert.equal(await p.evaluate(()=>typeof startInteractiveSimulation),'undefined');const d=p.waitForEvent('download');await p.click('#export');await d;await p.close();return {recommendation:true,csv:true};});
  await test('Canvas 3D no disponible',{},'Mensaje alternativo y cálculo válido',async()=>{const p=await browser.newPage();await p.addInitScript(()=>{const original=HTMLCanvasElement.prototype.getContext;HTMLCanvasElement.prototype.getContext=function(type,...args){return this.id==='architecture3d'?null:original.call(this,type,...args);};});await p.goto(url);await p.click('#run');assert.match(await p.locator('#interactiveLab').textContent(),/no disponible/);assert.equal(await p.evaluate(()=>MenuShieldApp.lastRun.winner.id),'mono');await p.close();return {fallback:true,winner:'mono'};});
- await test('Consola y recursos normales',{},'Cero errores',async()=>{assert.deepEqual(report.runtimeErrors,[]);assert.deepEqual(report.consoleErrors,[]);assert.deepEqual(report.requestFailures,[]);return {runtime:0,console:0,resources:0};});
+ await test('Consola y recursos normales',{},'Cero errores',async()=>{assert.deepEqual(report.runtimeErrors,[]);assert.deepEqual(report.consoleErrors,[]);assert.deepEqual(report.requestFailures,[]);assert.deepEqual(report.httpErrors,[]);return {runtime:0,console:0,resources:0};});
  }finally{await browser.close();await fs.writeFile(published?'artifacts/published-tests.json':'docs/browser-tests.json',JSON.stringify(report,null,2)+'\n');}
 })().catch(e=>{console.error(e);process.exitCode=1;});
