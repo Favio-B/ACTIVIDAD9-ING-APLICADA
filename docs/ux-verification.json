@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-29T00:08:42.044Z",
+  "model": {
+    "passed": 24,
+    "total": 24,
+    "sha256": "f3c05cddb4f7197803bafd71ac0521e5fba6205781802b043a4784a4e2a0d84d",
+    "unchanged": true
+  },
+  "browser": {
+    "passed": 25,
+    "total": 25
+  },
+  "ux": {
+    "passed": 13,
+    "total": 13
+  },
+  "scope": "Verificación local de esta copia. No es una comprobación de publicación ni una certificación WCAG."
+}

@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-27T03:24:03.944Z",
-  "url": "file:///C:/Users/febm6/OneDrive/Escritorio/ACTIVIDAD9-ING-APLICADA/index.html",
+  "timestamp": "2026-10-29T00:07:20.975Z",
+  "url": "file:///C:/Users/febm6/Documents/Codex/2026-10-26/referenced-chatgpt-conversation-this-is-an/outputs/MenuShield_UX_UI/proyecto/index.html",
   "tests": [
     {
       "name": "Referencia y jerarquía",
@@ -244,22 +244,22 @@
         {
           "viewport": 360,
           "content": 360,
-          "columns": "332px"
+          "columns": "328px"
         },
         {
           "viewport": 390,
           "content": 390,
-          "columns": "362px"
+          "columns": "358px"
         },
         {
           "viewport": 768,
           "content": 768,
-          "columns": "185px 519px"
+          "columns": "178px 506px"
         },
         {
           "viewport": 1280,
           "content": 1280,
-          "columns": "220px 988px"
+          "columns": "204px 984px"
         }
       ],
       "pass": true
@@ -329,7 +329,7 @@
       "expected": "Cambios de sección sin desplazamiento largo",
       "actual": {
         "visibleSections": 1,
-        "resultHeight": 1690
+        "resultHeight": 1955
       },
       "pass": true
     },

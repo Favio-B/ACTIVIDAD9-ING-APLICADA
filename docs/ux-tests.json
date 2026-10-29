@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-29T00:06:57.696Z",
+  "checks": [
+    {
+      "name": "Primera ejecución sin diferencias inventadas",
+      "pass": true
+    },
+    {
+      "name": "Antes y después de CPU 2 a 4, misma arquitectura",
+      "pass": true
+    },
+    {
+      "name": "Entradas inválidas no cambian el historial visual",
+      "pass": true
+    },
+    {
+      "name": "Cambio de ganadora conserva arquitectura comparable y advierte cambios múltiples",
+      "pass": true
+    },
+    {
+      "name": "Los cinco gráficos reflejan la ejecución",
+      "pass": true
+    },
+    {
+      "name": "Motivos siempre visibles y ecuaciones plegables",
+      "pass": true
+    },
+    {
+      "name": "Escena sincronizada, selector y repetición sin recalcular",
+      "pass": true
+    },
+    {
+      "name": "Movimiento reducido mantiene recorrido pausado",
+      "pass": true
+    },
+    {
+      "name": "Cola ilustrativa y alerta por saturación",
+      "pass": true
+    },
+    {
+      "name": "Navegación por teclado y foco visible",
+      "pass": true
+    },
+    {
+      "name": "Diseño adaptable en todas las vistas",
+      "pass": true
+    },
+    {
+      "name": "Movimiento normal avanza, pausa detiene y cambiar preferencia pausa",
+      "pass": true
+    },
+    {
+      "name": "Sin errores de ejecución",
+      "pass": true
+    }
+  ]
+}

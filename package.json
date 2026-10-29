@@ -14,6 +14,7 @@
     "test": "node scripts/test-model.cjs",
     "test:browser": "node scripts/test-browser.cjs",
     "build:docs": "node scripts/build-documentation.mjs",
-    "build": "npm run build:css && npm run build:docs"
+    "build": "npm run build:css && npm run build:docs",
+    "test:ux": "node scripts/test-experience.cjs"
   }
 }
